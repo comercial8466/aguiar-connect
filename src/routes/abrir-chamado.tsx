@@ -31,7 +31,7 @@ export const Route = createFileRoute("/abrir-chamado")({
       },
     ],
   }),
-  component: AbrirChamado;
+  component: AbrirChamado,
 });
 
 const categorias = ["PDV / Frente de caixa", "ERP / Retaguarda", "Fiscal (NFC-e, SAT, NF-e)", "Rede e internet", "Computador / Impressora", "Outros"];
