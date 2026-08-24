@@ -10,33 +10,97 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
+import { Route as ServicosAutomacaoComercialRouteImport } from './routes/servicos.automacao-comercial'
+import { Route as ServicosConsultoriaRouteImport } from './routes/servicos.consultoria'
+import { Route as ServicosSuporteRemotoRouteImport } from './routes/servicos.suporte-remoto'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicosRoute = ServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosIndexRoute = ServicosIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ServicosRoute,
+} as any)
+const ServicosAutomacaoComercialRoute =
+  ServicosAutomacaoComercialRouteImport.update({
+    id: '/automacao-comercial',
+    path: '/automacao-comercial',
+    getParentRoute: () => ServicosRoute,
+  } as any)
+const ServicosConsultoriaRoute = ServicosConsultoriaRouteImport.update({
+  id: '/consultoria',
+  path: '/consultoria',
+  getParentRoute: () => ServicosRoute,
+} as any)
+const ServicosSuporteRemotoRoute = ServicosSuporteRemotoRouteImport.update({
+  id: '/suporte-remoto',
+  path: '/suporte-remoto',
+  getParentRoute: () => ServicosRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/servicos': typeof ServicosRouteWithChildren
+  '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
+  '/servicos/consultoria': typeof ServicosConsultoriaRoute
+  '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
+  '/servicos/consultoria': typeof ServicosConsultoriaRoute
+  '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
+  '/servicos': typeof ServicosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/servicos': typeof ServicosRouteWithChildren
+  '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
+  '/servicos/consultoria': typeof ServicosConsultoriaRoute
+  '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/servicos'
+    | '/servicos/automacao-comercial'
+    | '/servicos/consultoria'
+    | '/servicos/suporte-remoto'
+    | '/servicos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/servicos/automacao-comercial'
+    | '/servicos/consultoria'
+    | '/servicos/suporte-remoto'
+    | '/servicos'
+  id:
+    | '__root__'
+    | '/'
+    | '/servicos'
+    | '/servicos/automacao-comercial'
+    | '/servicos/consultoria'
+    | '/servicos/suporte-remoto'
+    | '/servicos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ServicosRoute: typeof ServicosRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +112,65 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/servicos': {
+      id: '/servicos'
+      path: '/servicos'
+      fullPath: '/servicos'
+      preLoaderRoute: typeof ServicosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/': {
+      id: '/servicos/'
+      path: '/'
+      fullPath: '/servicos/'
+      preLoaderRoute: typeof ServicosIndexRouteImport
+      parentRoute: typeof ServicosRoute
+    }
+    '/servicos/automacao-comercial': {
+      id: '/servicos/automacao-comercial'
+      path: '/automacao-comercial'
+      fullPath: '/servicos/automacao-comercial'
+      preLoaderRoute: typeof ServicosAutomacaoComercialRouteImport
+      parentRoute: typeof ServicosRoute
+    }
+    '/servicos/consultoria': {
+      id: '/servicos/consultoria'
+      path: '/consultoria'
+      fullPath: '/servicos/consultoria'
+      preLoaderRoute: typeof ServicosConsultoriaRouteImport
+      parentRoute: typeof ServicosRoute
+    }
+    '/servicos/suporte-remoto': {
+      id: '/servicos/suporte-remoto'
+      path: '/suporte-remoto'
+      fullPath: '/servicos/suporte-remoto'
+      preLoaderRoute: typeof ServicosSuporteRemotoRouteImport
+      parentRoute: typeof ServicosRoute
+    }
   }
 }
 
+interface ServicosRouteChildren {
+  ServicosAutomacaoComercialRoute: typeof ServicosAutomacaoComercialRoute
+  ServicosConsultoriaRoute: typeof ServicosConsultoriaRoute
+  ServicosSuporteRemotoRoute: typeof ServicosSuporteRemotoRoute
+  ServicosIndexRoute: typeof ServicosIndexRoute
+}
+
+const ServicosRouteChildren: ServicosRouteChildren = {
+  ServicosAutomacaoComercialRoute: ServicosAutomacaoComercialRoute,
+  ServicosConsultoriaRoute: ServicosConsultoriaRoute,
+  ServicosSuporteRemotoRoute: ServicosSuporteRemotoRoute,
+  ServicosIndexRoute: ServicosIndexRoute,
+}
+
+const ServicosRouteWithChildren = ServicosRoute._addFileChildren(
+  ServicosRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ServicosRoute: ServicosRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
