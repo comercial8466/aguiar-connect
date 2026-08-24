@@ -41,8 +41,8 @@ function AbrirChamado() {
   const [nome, setNome] = useState("");
   const [empresa, setEmpresa] = useState("");
   const [email, setEmail] = useState("");
-  const [categoria, setCategoria] = useState(categorias[0]);
-  const [urgencia, setUrgencia] = useState(urgencias[1]);
+  const [categoria, setCategoria] = useState<string>("PDV / Frente de caixa");
+  const [urgencia, setUrgencia] = useState<string>("Média");
   const [descricao, setDescricao] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
