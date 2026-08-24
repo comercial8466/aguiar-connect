@@ -10,33 +10,188 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AbrirChamadoRouteImport } from './routes/abrir-chamado'
+import { Route as ContatoRouteImport } from './routes/contato'
+import { Route as FaqRouteImport } from './routes/faq'
+import { Route as PortalRouteImport } from './routes/portal'
+import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as ServicosRouteImport } from './routes/servicos'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as TermosRouteImport } from './routes/termos'
+import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
+import { Route as ServicosAutomacaoComercialRouteImport } from './routes/servicos.automacao-comercial'
+import { Route as ServicosConsultoriaRouteImport } from './routes/servicos.consultoria'
+import { Route as ServicosSuporteRemotoRouteImport } from './routes/servicos.suporte-remoto'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AbrirChamadoRoute = AbrirChamadoRouteImport.update({
+  id: '/abrir-chamado',
+  path: '/abrir-chamado',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContatoRoute = ContatoRouteImport.update({
+  id: '/contato',
+  path: '/contato',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FaqRoute = FaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortalRoute = PortalRouteImport.update({
+  id: '/portal',
+  path: '/portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadeRoute = PrivacidadeRouteImport.update({
+  id: '/privacidade',
+  path: '/privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosRoute = ServicosRouteImport.update({
+  id: '/servicos',
+  path: '/servicos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermosRoute = TermosRouteImport.update({
+  id: '/termos',
+  path: '/termos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicosIndexRoute = ServicosIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ServicosRoute,
+} as any)
+const ServicosAutomacaoComercialRoute =
+  ServicosAutomacaoComercialRouteImport.update({
+    id: '/automacao-comercial',
+    path: '/automacao-comercial',
+    getParentRoute: () => ServicosRoute,
+  } as any)
+const ServicosConsultoriaRoute = ServicosConsultoriaRouteImport.update({
+  id: '/consultoria',
+  path: '/consultoria',
+  getParentRoute: () => ServicosRoute,
+} as any)
+const ServicosSuporteRemotoRoute = ServicosSuporteRemotoRouteImport.update({
+  id: '/suporte-remoto',
+  path: '/suporte-remoto',
+  getParentRoute: () => ServicosRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/abrir-chamado': typeof AbrirChamadoRoute
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/portal': typeof PortalRoute
+  '/privacidade': typeof PrivacidadeRoute
+  '/servicos': typeof ServicosRouteWithChildren
+  '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
+  '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
+  '/servicos/consultoria': typeof ServicosConsultoriaRoute
+  '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/abrir-chamado': typeof AbrirChamadoRoute
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/portal': typeof PortalRoute
+  '/privacidade': typeof PrivacidadeRoute
+  '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
+  '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
+  '/servicos/consultoria': typeof ServicosConsultoriaRoute
+  '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
+  '/servicos': typeof ServicosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/abrir-chamado': typeof AbrirChamadoRoute
+  '/contato': typeof ContatoRoute
+  '/faq': typeof FaqRoute
+  '/portal': typeof PortalRoute
+  '/privacidade': typeof PrivacidadeRoute
+  '/servicos': typeof ServicosRouteWithChildren
+  '/sobre': typeof SobreRoute
+  '/termos': typeof TermosRoute
+  '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
+  '/servicos/consultoria': typeof ServicosConsultoriaRoute
+  '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
+  '/servicos/': typeof ServicosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/abrir-chamado'
+    | '/contato'
+    | '/faq'
+    | '/portal'
+    | '/privacidade'
+    | '/servicos'
+    | '/sobre'
+    | '/termos'
+    | '/servicos/automacao-comercial'
+    | '/servicos/consultoria'
+    | '/servicos/suporte-remoto'
+    | '/servicos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/abrir-chamado'
+    | '/contato'
+    | '/faq'
+    | '/portal'
+    | '/privacidade'
+    | '/sobre'
+    | '/termos'
+    | '/servicos/automacao-comercial'
+    | '/servicos/consultoria'
+    | '/servicos/suporte-remoto'
+    | '/servicos'
+  id:
+    | '__root__'
+    | '/'
+    | '/abrir-chamado'
+    | '/contato'
+    | '/faq'
+    | '/portal'
+    | '/privacidade'
+    | '/servicos'
+    | '/sobre'
+    | '/termos'
+    | '/servicos/automacao-comercial'
+    | '/servicos/consultoria'
+    | '/servicos/suporte-remoto'
+    | '/servicos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AbrirChamadoRoute: typeof AbrirChamadoRoute
+  ContatoRoute: typeof ContatoRoute
+  FaqRoute: typeof FaqRoute
+  PortalRoute: typeof PortalRoute
+  PrivacidadeRoute: typeof PrivacidadeRoute
+  ServicosRoute: typeof ServicosRouteWithChildren
+  SobreRoute: typeof SobreRoute
+  TermosRoute: typeof TermosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +203,121 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/abrir-chamado': {
+      id: '/abrir-chamado'
+      path: '/abrir-chamado'
+      fullPath: '/abrir-chamado'
+      preLoaderRoute: typeof AbrirChamadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contato': {
+      id: '/contato'
+      path: '/contato'
+      fullPath: '/contato'
+      preLoaderRoute: typeof ContatoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/faq': {
+      id: '/faq'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portal': {
+      id: '/portal'
+      path: '/portal'
+      fullPath: '/portal'
+      preLoaderRoute: typeof PortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidade': {
+      id: '/privacidade'
+      path: '/privacidade'
+      fullPath: '/privacidade'
+      preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos': {
+      id: '/servicos'
+      path: '/servicos'
+      fullPath: '/servicos'
+      preLoaderRoute: typeof ServicosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/termos': {
+      id: '/termos'
+      path: '/termos'
+      fullPath: '/termos'
+      preLoaderRoute: typeof TermosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/servicos/': {
+      id: '/servicos/'
+      path: '/'
+      fullPath: '/servicos/'
+      preLoaderRoute: typeof ServicosIndexRouteImport
+      parentRoute: typeof ServicosRoute
+    }
+    '/servicos/automacao-comercial': {
+      id: '/servicos/automacao-comercial'
+      path: '/automacao-comercial'
+      fullPath: '/servicos/automacao-comercial'
+      preLoaderRoute: typeof ServicosAutomacaoComercialRouteImport
+      parentRoute: typeof ServicosRoute
+    }
+    '/servicos/consultoria': {
+      id: '/servicos/consultoria'
+      path: '/consultoria'
+      fullPath: '/servicos/consultoria'
+      preLoaderRoute: typeof ServicosConsultoriaRouteImport
+      parentRoute: typeof ServicosRoute
+    }
+    '/servicos/suporte-remoto': {
+      id: '/servicos/suporte-remoto'
+      path: '/suporte-remoto'
+      fullPath: '/servicos/suporte-remoto'
+      preLoaderRoute: typeof ServicosSuporteRemotoRouteImport
+      parentRoute: typeof ServicosRoute
+    }
   }
 }
 
+interface ServicosRouteChildren {
+  ServicosAutomacaoComercialRoute: typeof ServicosAutomacaoComercialRoute
+  ServicosConsultoriaRoute: typeof ServicosConsultoriaRoute
+  ServicosSuporteRemotoRoute: typeof ServicosSuporteRemotoRoute
+  ServicosIndexRoute: typeof ServicosIndexRoute
+}
+
+const ServicosRouteChildren: ServicosRouteChildren = {
+  ServicosAutomacaoComercialRoute: ServicosAutomacaoComercialRoute,
+  ServicosConsultoriaRoute: ServicosConsultoriaRoute,
+  ServicosSuporteRemotoRoute: ServicosSuporteRemotoRoute,
+  ServicosIndexRoute: ServicosIndexRoute,
+}
+
+const ServicosRouteWithChildren = ServicosRoute._addFileChildren(
+  ServicosRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AbrirChamadoRoute: AbrirChamadoRoute,
+  ContatoRoute: ContatoRoute,
+  FaqRoute: FaqRoute,
+  PortalRoute: PortalRoute,
+  PrivacidadeRoute: PrivacidadeRoute,
+  ServicosRoute: ServicosRouteWithChildren,
+  SobreRoute: SobreRoute,
+  TermosRoute: TermosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
