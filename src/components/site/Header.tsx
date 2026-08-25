@@ -101,6 +101,32 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            {session ? (
+              <>
+                <Link
+                  to="/painel"
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-2 py-2.5 text-sm font-medium text-foreground hover:bg-secondary"
+                >
+                  Meu painel
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="rounded-md px-2 py-2.5 text-left text-sm font-medium text-foreground hover:bg-secondary"
+                >
+                  Sair
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/auth"
+                onClick={() => setOpen(false)}
+                className="rounded-md px-2 py-2.5 text-sm font-medium text-foreground hover:bg-secondary"
+              >
+                Entrar
+              </Link>
+            )}
             <Button variant="hero" className="mt-2" asChild>
               <Link to="/abrir-chamado" onClick={() => setOpen(false)}>
                 Abrir Chamado Agora
