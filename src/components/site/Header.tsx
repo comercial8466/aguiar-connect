@@ -16,6 +16,14 @@ const nav = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { session, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    setOpen(false);
+    await signOut();
+    void navigate({ to: "/auth", replace: true });
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/90 backdrop-blur">
