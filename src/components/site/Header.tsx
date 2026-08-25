@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-aguiarti.png";
 import { WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
+import { useAuth } from "@/hooks/useAuth";
 
 const nav = [
   { to: "/servicos", label: "Serviços" },
