@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AbrirChamadoRouteImport } from './routes/abrir-chamado'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as PortalRouteImport } from './routes/portal'
@@ -31,6 +32,11 @@ const IndexRoute = IndexRouteImport.update({
 const AbrirChamadoRoute = AbrirChamadoRouteImport.update({
   id: '/abrir-chamado',
   path: '/abrir-chamado',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContatoRoute = ContatoRouteImport.update({
@@ -93,6 +99,7 @@ const ServicosSuporteRemotoRoute = ServicosSuporteRemotoRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/abrir-chamado': typeof AbrirChamadoRoute
+  '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
   '/portal': typeof PortalRoute
@@ -108,6 +115,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/abrir-chamado': typeof AbrirChamadoRoute
+  '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
   '/portal': typeof PortalRoute
@@ -123,6 +131,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/abrir-chamado': typeof AbrirChamadoRoute
+  '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
   '/portal': typeof PortalRoute
@@ -140,6 +149,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/abrir-chamado'
+    | '/auth'
     | '/contato'
     | '/faq'
     | '/portal'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/abrir-chamado'
+    | '/auth'
     | '/contato'
     | '/faq'
     | '/portal'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/abrir-chamado'
+    | '/auth'
     | '/contato'
     | '/faq'
     | '/portal'
@@ -185,6 +197,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AbrirChamadoRoute: typeof AbrirChamadoRoute
+  AuthRoute: typeof AuthRoute
   ContatoRoute: typeof ContatoRoute
   FaqRoute: typeof FaqRoute
   PortalRoute: typeof PortalRoute
@@ -208,6 +221,13 @@ declare module '@tanstack/react-router' {
       path: '/abrir-chamado'
       fullPath: '/abrir-chamado'
       preLoaderRoute: typeof AbrirChamadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contato': {
@@ -311,6 +331,7 @@ const ServicosRouteWithChildren = ServicosRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AbrirChamadoRoute: AbrirChamadoRoute,
+  AuthRoute: AuthRoute,
   ContatoRoute: ContatoRoute,
   FaqRoute: FaqRoute,
   PortalRoute: PortalRoute,
