@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-aguiarti.png";
 import { WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
+import { useAuth } from "@/hooks/useAuth";
 
 const nav = [
   { to: "/servicos", label: "Serviços" },
@@ -15,6 +16,14 @@ const nav = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { session, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    setOpen(false);
+    await signOut();
+    void navigate({ to: "/auth", replace: true });
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/90 backdrop-blur">
@@ -49,6 +58,20 @@ export function Header() {
             <Phone className="h-4 w-4" aria-hidden="true" />
             {WHATSAPP_DISPLAY}
           </a>
+          {session ? (
+            <>
+              <Button variant="outline" size="default" asChild>
+                <Link to="/painel">Meu painel</Link>
+              </Button>
+              <Button variant="ghost" size="default" onClick={handleSignOut}>
+                Sair
+              </Button>
+            </>
+          ) : (
+            <Button variant="outline" size="default" asChild>
+              <Link to="/auth">Entrar</Link>
+            </Button>
+          )}
           <Button variant="hero" size="default" asChild>
             <Link to="/abrir-chamado">Abrir Chamado Agora</Link>
           </Button>
@@ -78,6 +101,32 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            {session ? (
+              <>
+                <Link
+                  to="/painel"
+                  onClick={() => setOpen(false)}
+                  className="rounded-md px-2 py-2.5 text-sm font-medium text-foreground hover:bg-secondary"
+                >
+                  Meu painel
+                </Link>
+                <button
+                  type="button"
+                  onClick={handleSignOut}
+                  className="rounded-md px-2 py-2.5 text-left text-sm font-medium text-foreground hover:bg-secondary"
+                >
+                  Sair
+                </button>
+              </>
+            ) : (
+              <Link
+                to="/auth"
+                onClick={() => setOpen(false)}
+                className="rounded-md px-2 py-2.5 text-sm font-medium text-foreground hover:bg-secondary"
+              >
+                Entrar
+              </Link>
+            )}
             <Button variant="hero" className="mt-2" asChild>
               <Link to="/abrir-chamado" onClick={() => setOpen(false)}>
                 Abrir Chamado Agora
