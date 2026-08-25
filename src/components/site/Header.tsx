@@ -58,6 +58,20 @@ export function Header() {
             <Phone className="h-4 w-4" aria-hidden="true" />
             {WHATSAPP_DISPLAY}
           </a>
+          {session ? (
+            <>
+              <Button variant="outline" size="default" asChild>
+                <Link to="/painel">Meu painel</Link>
+              </Button>
+              <Button variant="ghost" size="default" onClick={handleSignOut}>
+                Sair
+              </Button>
+            </>
+          ) : (
+            <Button variant="outline" size="default" asChild>
+              <Link to="/auth">Entrar</Link>
+            </Button>
+          )}
           <Button variant="hero" size="default" asChild>
             <Link to="/abrir-chamado">Abrir Chamado Agora</Link>
           </Button>
