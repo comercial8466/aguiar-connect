@@ -227,7 +227,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      security_audit: {
+        Args: never
+        Returns: {
+          check_name: string
+          detail: string
+          severity: string
+        }[]
+      }
     }
     Enums: {
       app_role: "cliente" | "empresa" | "tecnico" | "admin"
