@@ -50,15 +50,19 @@ function Portal() {
         </div>
 
         <div className="mt-14 rounded-2xl border border-border bg-secondary/60 p-8 text-center">
-          <h2 className="text-xl font-bold text-primary">Acesso ao portal em implantação</h2>
+          <h2 className="text-xl font-bold text-primary">Acesse sua conta</h2>
           <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
-            O login com e-mail/senha e Google, o banco de chamados e o dashboard de SLA são a próxima
-            etapa do projeto. Enquanto isso, abra seu chamado pelo formulário ou pelo WhatsApp — o
-            atendimento segue o mesmo SLA.
+            Entre com e-mail e senha ou com sua conta Google. O acesso é por perfil: Cliente,
+            Empresa, Técnico e Gestor/Admin — cada um vê apenas as áreas do seu papel.
           </p>
-          <Button variant="hero" size="lg" className="mt-6" asChild>
-            <Link to="/abrir-chamado">Abrir chamado agora</Link>
-          </Button>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Button variant="hero" size="lg" asChild>
+              <Link to="/auth">Entrar no portal</Link>
+            </Button>
+            <Button variant="heroOutline" size="lg" asChild>
+              <Link to="/abrir-chamado">Abrir chamado agora</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </>
