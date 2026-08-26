@@ -182,7 +182,7 @@ function AdminUsers() {
                 <p className="text-xs text-muted-foreground">{row.company ?? "—"}</p>
               </div>
               <Select
-                value={row.roles[0] ?? undefined}
+                value={row.roles[0] ?? ""}
                 onValueChange={(value) => setRole(row.id, value as AppRole, row.roles)}
               >
                 <SelectTrigger className="w-48">
