@@ -1,20 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import {
-  BarChart3,
-  CheckCircle2,
-  Clock,
-  Headset,
-  ListChecks,
-  MessageCircle,
-  Monitor,
-  Network,
-  ShieldCheck,
-  Store,
-} from "lucide-react";
+import { BarChart3, CheckCircle2, Clock, Headset, ListChecks, Monitor, Network, ShieldCheck, Store } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import heroImage from "@/assets/hero-dashboard.jpg";
 import { WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -102,7 +92,7 @@ function Home() {
               </Button>
               <Button variant="heroOutline" size="xl" asChild>
                 <a href={whatsappLink("Olá! Gostaria de falar com a AguiarT.I.")} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle aria-hidden="true" /> Fale pelo WhatsApp
+                  <WhatsAppIcon aria-hidden="true" /> Fale pelo WhatsApp
                 </a>
               </Button>
             </div>
@@ -248,7 +238,7 @@ function Home() {
             </Button>
             <Button variant="heroOutline" size="xl" asChild>
               <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
-                <MessageCircle aria-hidden="true" /> {WHATSAPP_DISPLAY}
+                <WhatsAppIcon aria-hidden="true" /> {WHATSAPP_DISPLAY}
               </a>
             </Button>
           </div>

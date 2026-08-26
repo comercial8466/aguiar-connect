@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, MapPin, MessageCircle } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
 import { Button } from "@/components/ui/button";
 import { SITE_CITY, SITE_EMAIL, WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 export const Route = createFileRoute("/contato")({
   head: () => ({
@@ -26,7 +27,7 @@ function Contato() {
       <PageHero title="Contato" subtitle="Resposta rápida por WhatsApp e atendimento remoto em todo o Brasil." />
       <div className="mx-auto grid max-w-4xl gap-6 px-4 py-16 md:grid-cols-3">
         <div className="rounded-xl border border-border p-6">
-          <MessageCircle className="h-5 w-5 text-primary" aria-hidden="true" />
+          <WhatsAppIcon className="h-5 w-5 text-primary" aria-hidden="true" />
           <h2 className="mt-3 font-semibold">WhatsApp</h2>
           <p className="mt-1 text-sm text-muted-foreground">{WHATSAPP_DISPLAY}</p>
           <Button variant="whatsapp" className="mt-4 w-full" asChild>

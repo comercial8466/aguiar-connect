@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { MessageCircle } from "lucide-react";
+
 import { PageHero } from "@/components/site/PageHero";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { whatsappLink } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 export const Route = createFileRoute("/abrir-chamado")({
   head: () => ({
@@ -136,7 +137,7 @@ function AbrirChamado() {
           </p>
 
           <Button type="submit" variant="hero" size="lg" className="w-full">
-            <MessageCircle aria-hidden="true" /> Enviar chamado pelo WhatsApp
+            <WhatsAppIcon aria-hidden="true" /> Enviar chamado pelo WhatsApp
           </Button>
         </form>
       </div>

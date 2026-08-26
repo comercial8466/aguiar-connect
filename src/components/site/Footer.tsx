@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, MapPin, MessageCircle } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import logo from "@/assets/logo-aguiarti.png";
 import { SITE_CITY, SITE_EMAIL, WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
 export function Footer() {
   return (
@@ -82,7 +83,7 @@ export function Footer() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 hover:text-accent"
               >
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                <WhatsAppIcon className="h-4 w-4" aria-hidden="true" />
                 {WHATSAPP_DISPLAY}
               </a>
             </li>
