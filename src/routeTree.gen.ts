@@ -26,6 +26,7 @@ import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as ServicosAutomacaoComercialRouteImport } from './routes/servicos.automacao-comercial'
 import { Route as ServicosConsultoriaRouteImport } from './routes/servicos.consultoria'
 import { Route as ServicosSuporteRemotoRouteImport } from './routes/servicos.suporte-remoto'
+import { Route as AuthenticatedChamadosTicketIdRouteImport } from './routes/_authenticated/chamados.$ticketId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -112,6 +113,12 @@ const ServicosSuporteRemotoRoute = ServicosSuporteRemotoRouteImport.update({
   path: '/suporte-remoto',
   getParentRoute: () => ServicosRoute,
 } as any)
+const AuthenticatedChamadosTicketIdRoute =
+  AuthenticatedChamadosTicketIdRouteImport.update({
+    id: '/$ticketId',
+    path: '/$ticketId',
+    getParentRoute: () => AuthenticatedChamadosRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -124,12 +131,13 @@ export interface FileRoutesByFullPath {
   '/servicos': typeof ServicosRouteWithChildren
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
-  '/chamados': typeof AuthenticatedChamadosRoute
+  '/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/painel': typeof AuthenticatedPainelRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -141,12 +149,13 @@ export interface FileRoutesByTo {
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
-  '/chamados': typeof AuthenticatedChamadosRoute
+  '/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/painel': typeof AuthenticatedPainelRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos': typeof ServicosIndexRoute
+  '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -161,12 +170,13 @@ export interface FileRoutesById {
   '/servicos': typeof ServicosRouteWithChildren
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
-  '/_authenticated/chamados': typeof AuthenticatedChamadosRoute
+  '/_authenticated/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/_authenticated/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos/'
+    | '/chamados/$ticketId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos'
+    | '/chamados/$ticketId'
   id:
     | '__root__'
     | '/'
@@ -223,6 +235,7 @@ export interface FileRouteTypes {
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos/'
+    | '/_authenticated/chamados/$ticketId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -360,16 +373,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosSuporteRemotoRouteImport
       parentRoute: typeof ServicosRoute
     }
+    '/_authenticated/chamados/$ticketId': {
+      id: '/_authenticated/chamados/$ticketId'
+      path: '/$ticketId'
+      fullPath: '/chamados/$ticketId'
+      preLoaderRoute: typeof AuthenticatedChamadosTicketIdRouteImport
+      parentRoute: typeof AuthenticatedChamadosRoute
+    }
   }
 }
 
+interface AuthenticatedChamadosRouteChildren {
+  AuthenticatedChamadosTicketIdRoute: typeof AuthenticatedChamadosTicketIdRoute
+}
+
+const AuthenticatedChamadosRouteChildren: AuthenticatedChamadosRouteChildren = {
+  AuthenticatedChamadosTicketIdRoute: AuthenticatedChamadosTicketIdRoute,
+}
+
+const AuthenticatedChamadosRouteWithChildren =
+  AuthenticatedChamadosRoute._addFileChildren(
+    AuthenticatedChamadosRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedChamadosRoute: typeof AuthenticatedChamadosRoute
+  AuthenticatedChamadosRoute: typeof AuthenticatedChamadosRouteWithChildren
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedChamadosRoute: AuthenticatedChamadosRoute,
+  AuthenticatedChamadosRoute: AuthenticatedChamadosRouteWithChildren,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
 }
 
