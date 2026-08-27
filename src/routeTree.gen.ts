@@ -26,6 +26,7 @@ import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as ServicosAutomacaoComercialRouteImport } from './routes/servicos.automacao-comercial'
 import { Route as ServicosConsultoriaRouteImport } from './routes/servicos.consultoria'
 import { Route as ServicosSuporteRemotoRouteImport } from './routes/servicos.suporte-remoto'
+import { Route as AuthenticatedAdminUsuariosRouteImport } from './routes/_authenticated/admin.usuarios'
 import { Route as AuthenticatedChamadosTicketIdRouteImport } from './routes/_authenticated/chamados.$ticketId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -113,6 +114,12 @@ const ServicosSuporteRemotoRoute = ServicosSuporteRemotoRouteImport.update({
   path: '/suporte-remoto',
   getParentRoute: () => ServicosRoute,
 } as any)
+const AuthenticatedAdminUsuariosRoute =
+  AuthenticatedAdminUsuariosRouteImport.update({
+    id: '/admin/usuarios',
+    path: '/admin/usuarios',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedChamadosTicketIdRoute =
   AuthenticatedChamadosTicketIdRouteImport.update({
     id: '/$ticketId',
@@ -137,6 +144,7 @@ export interface FileRoutesByFullPath {
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
 export interface FileRoutesByTo {
@@ -155,6 +163,7 @@ export interface FileRoutesByTo {
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos': typeof ServicosIndexRoute
+  '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
 export interface FileRoutesById {
@@ -176,6 +185,7 @@ export interface FileRoutesById {
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/_authenticated/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/_authenticated/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
 export interface FileRouteTypes {
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos/'
+    | '/admin/usuarios'
     | '/chamados/$ticketId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -215,6 +226,7 @@ export interface FileRouteTypes {
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos'
+    | '/admin/usuarios'
     | '/chamados/$ticketId'
   id:
     | '__root__'
@@ -235,6 +247,7 @@ export interface FileRouteTypes {
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos/'
+    | '/_authenticated/admin/usuarios'
     | '/_authenticated/chamados/$ticketId'
   fileRoutesById: FileRoutesById
 }
@@ -373,6 +386,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosSuporteRemotoRouteImport
       parentRoute: typeof ServicosRoute
     }
+    '/_authenticated/admin/usuarios': {
+      id: '/_authenticated/admin/usuarios'
+      path: '/admin/usuarios'
+      fullPath: '/admin/usuarios'
+      preLoaderRoute: typeof AuthenticatedAdminUsuariosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/chamados/$ticketId': {
       id: '/_authenticated/chamados/$ticketId'
       path: '/$ticketId'
@@ -399,11 +419,13 @@ const AuthenticatedChamadosRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedChamadosRoute: typeof AuthenticatedChamadosRouteWithChildren
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedAdminUsuariosRoute: typeof AuthenticatedAdminUsuariosRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChamadosRoute: AuthenticatedChamadosRouteWithChildren,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedAdminUsuariosRoute: AuthenticatedAdminUsuariosRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
