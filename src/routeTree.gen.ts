@@ -20,11 +20,14 @@ import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TermosRouteImport } from './routes/termos'
+import { Route as AuthenticatedChamadosRouteImport } from './routes/_authenticated/chamados'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as ServicosAutomacaoComercialRouteImport } from './routes/servicos.automacao-comercial'
 import { Route as ServicosConsultoriaRouteImport } from './routes/servicos.consultoria'
 import { Route as ServicosSuporteRemotoRouteImport } from './routes/servicos.suporte-remoto'
+import { Route as AuthenticatedAdminUsuariosRouteImport } from './routes/_authenticated/admin.usuarios'
+import { Route as AuthenticatedChamadosTicketIdRouteImport } from './routes/_authenticated/chamados.$ticketId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -80,6 +83,11 @@ const TermosRoute = TermosRouteImport.update({
   path: '/termos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedChamadosRoute = AuthenticatedChamadosRouteImport.update({
+  id: '/chamados',
+  path: '/chamados',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   id: '/painel',
   path: '/painel',
@@ -106,6 +114,18 @@ const ServicosSuporteRemotoRoute = ServicosSuporteRemotoRouteImport.update({
   path: '/suporte-remoto',
   getParentRoute: () => ServicosRoute,
 } as any)
+const AuthenticatedAdminUsuariosRoute =
+  AuthenticatedAdminUsuariosRouteImport.update({
+    id: '/admin/usuarios',
+    path: '/admin/usuarios',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedChamadosTicketIdRoute =
+  AuthenticatedChamadosTicketIdRouteImport.update({
+    id: '/$ticketId',
+    path: '/$ticketId',
+    getParentRoute: () => AuthenticatedChamadosRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -118,11 +138,14 @@ export interface FileRoutesByFullPath {
   '/servicos': typeof ServicosRouteWithChildren
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
+  '/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/painel': typeof AuthenticatedPainelRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
+  '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -134,11 +157,14 @@ export interface FileRoutesByTo {
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
+  '/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/painel': typeof AuthenticatedPainelRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos': typeof ServicosIndexRoute
+  '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
+  '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -153,11 +179,14 @@ export interface FileRoutesById {
   '/servicos': typeof ServicosRouteWithChildren
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
+  '/_authenticated/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/_authenticated/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
+  '/_authenticated/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -172,11 +201,14 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/sobre'
     | '/termos'
+    | '/chamados'
     | '/painel'
     | '/servicos/automacao-comercial'
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos/'
+    | '/admin/usuarios'
+    | '/chamados/$ticketId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -188,11 +220,14 @@ export interface FileRouteTypes {
     | '/privacidade'
     | '/sobre'
     | '/termos'
+    | '/chamados'
     | '/painel'
     | '/servicos/automacao-comercial'
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos'
+    | '/admin/usuarios'
+    | '/chamados/$ticketId'
   id:
     | '__root__'
     | '/'
@@ -206,11 +241,14 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/sobre'
     | '/termos'
+    | '/_authenticated/chamados'
     | '/_authenticated/painel'
     | '/servicos/automacao-comercial'
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos/'
+    | '/_authenticated/admin/usuarios'
+    | '/_authenticated/chamados/$ticketId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -306,6 +344,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/chamados': {
+      id: '/_authenticated/chamados'
+      path: '/chamados'
+      fullPath: '/chamados'
+      preLoaderRoute: typeof AuthenticatedChamadosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/painel': {
       id: '/_authenticated/painel'
       path: '/painel'
@@ -341,15 +386,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosSuporteRemotoRouteImport
       parentRoute: typeof ServicosRoute
     }
+    '/_authenticated/admin/usuarios': {
+      id: '/_authenticated/admin/usuarios'
+      path: '/admin/usuarios'
+      fullPath: '/admin/usuarios'
+      preLoaderRoute: typeof AuthenticatedAdminUsuariosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/chamados/$ticketId': {
+      id: '/_authenticated/chamados/$ticketId'
+      path: '/$ticketId'
+      fullPath: '/chamados/$ticketId'
+      preLoaderRoute: typeof AuthenticatedChamadosTicketIdRouteImport
+      parentRoute: typeof AuthenticatedChamadosRoute
+    }
   }
 }
 
+interface AuthenticatedChamadosRouteChildren {
+  AuthenticatedChamadosTicketIdRoute: typeof AuthenticatedChamadosTicketIdRoute
+}
+
+const AuthenticatedChamadosRouteChildren: AuthenticatedChamadosRouteChildren = {
+  AuthenticatedChamadosTicketIdRoute: AuthenticatedChamadosTicketIdRoute,
+}
+
+const AuthenticatedChamadosRouteWithChildren =
+  AuthenticatedChamadosRoute._addFileChildren(
+    AuthenticatedChamadosRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedChamadosRoute: typeof AuthenticatedChamadosRouteWithChildren
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedAdminUsuariosRoute: typeof AuthenticatedAdminUsuariosRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedChamadosRoute: AuthenticatedChamadosRouteWithChildren,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedAdminUsuariosRoute: AuthenticatedAdminUsuariosRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
