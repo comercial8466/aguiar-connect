@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { BarChart3, Building2, LifeBuoy, ShieldCheck, Ticket } from "lucide-react";
-import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
-import { ROLE_LABELS, useAuth, type AppRole } from "@/hooks/useAuth";
+import {
+  BarChart3,
+  Building2,
+  KeyRound,
+  LifeBuoy,
+  ScrollText,
+  ShieldCheck,
+  Ticket,
+  Users,
+} from "lucide-react";
+import { ROLE_LABELS, useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 
 export const Route = createFileRoute("/_authenticated/painel")({
   head: () => ({
@@ -33,10 +33,6 @@ export const Route = createFileRoute("/_authenticated/painel")({
   }),
   component: Painel,
 });
-
-const ALL_ROLES: AppRole[] = ["cliente", "empresa", "tecnico", "admin"];
-
-type ProfileRow = { id: string; full_name: string | null; company: string | null };
 
 function Painel() {
   const { user, roles, hasRole, hasAnyRole, signOut } = useAuth();
@@ -74,10 +70,21 @@ function Painel() {
           <Ticket className="h-5 w-5 text-primary" aria-hidden="true" />
           <h2 className="mt-3 font-semibold">Meus chamados</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Abra um chamado e acompanhe o atendimento dentro do SLA contratado.
+            Abra um chamado, envie anexos e acompanhe o atendimento dentro do SLA contratado.
           </p>
           <Button variant="hero" className="mt-4" asChild>
-            <Link to="/abrir-chamado">Abrir chamado</Link>
+            <Link to="/chamados">Ir para os chamados</Link>
+          </Button>
+        </section>
+
+        <section className="rounded-xl border border-border p-6 shadow-card">
+          <KeyRound className="h-5 w-5 text-primary" aria-hidden="true" />
+          <h2 className="mt-3 font-semibold">Segurança da conta</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Ative a autenticação em duas etapas (obrigatória para Técnicos e Gestores).
+          </p>
+          <Button variant="outline" className="mt-4" asChild>
+            <Link to="/seguranca-conta">Configurar 2FA</Link>
           </Button>
         </section>
 
@@ -96,23 +103,51 @@ function Painel() {
             <LifeBuoy className="h-5 w-5 text-primary" aria-hidden="true" />
             <h2 className="mt-3 font-semibold">Fila de atendimento</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Chamados atribuídos, prazos de resposta e histórico técnico.
+              Chamados de todos os clientes, prazos de resposta e notas internas.
             </p>
+            <Button variant="outline" className="mt-4" asChild>
+              <Link to="/chamados">Abrir fila</Link>
+            </Button>
           </section>
         )}
 
         {hasRole("admin") && (
-          <section className="rounded-xl border border-border p-6 shadow-card">
-            <BarChart3 className="h-5 w-5 text-primary" aria-hidden="true" />
-            <h2 className="mt-3 font-semibold">Indicadores de gestão</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              TMA, TMR, % de SLA cumprido e volume de tickets por período.
-            </p>
-          </section>
+          <>
+            <section className="rounded-xl border border-border p-6 shadow-card">
+              <Users className="h-5 w-5 text-primary" aria-hidden="true" />
+              <h2 className="mt-3 font-semibold">Usuários e papéis</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Promova ou rebaixe contas entre Cliente, Empresa, Técnico e Gestor/Admin.
+              </p>
+              <Button variant="outline" className="mt-4" asChild>
+                <Link to="/admin/usuarios">Gerenciar usuários</Link>
+              </Button>
+            </section>
+
+            <section className="rounded-xl border border-border p-6 shadow-card">
+              <ScrollText className="h-5 w-5 text-primary" aria-hidden="true" />
+              <h2 className="mt-3 font-semibold">Logs de auditoria</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Quem acessou ou alterou chamados, papéis e prazos de SLA.
+              </p>
+              <Button variant="outline" className="mt-4" asChild>
+                <Link to="/admin/auditoria">Ver auditoria</Link>
+              </Button>
+            </section>
+
+            <section className="rounded-xl border border-border p-6 shadow-card">
+              <BarChart3 className="h-5 w-5 text-primary" aria-hidden="true" />
+              <h2 className="mt-3 font-semibold">Verificação de segurança</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Rode a checagem automatizada antes de publicar; itens críticos bloqueiam o deploy.
+              </p>
+              <Button variant="outline" className="mt-4" asChild>
+                <Link to="/admin/seguranca">Executar verificação</Link>
+              </Button>
+            </section>
+          </>
         )}
       </div>
-
-      {hasRole("admin") && <AdminUsers />}
 
       {!hasRole("admin") && (
         <p className="mt-10 flex items-center gap-2 text-xs text-muted-foreground">
@@ -124,82 +159,3 @@ function Painel() {
   );
 }
 
-function AdminUsers() {
-  const [rows, setRows] = useState<Array<ProfileRow & { roles: AppRole[] }>>([]);
-  const [loading, setLoading] = useState(true);
-
-  const load = async () => {
-    setLoading(true);
-    const [{ data: profiles }, { data: userRoles }] = await Promise.all([
-      supabase.from("profiles").select("id, full_name, company"),
-      supabase.from("user_roles").select("user_id, role"),
-    ]);
-    setRows(
-      (profiles ?? []).map((p) => ({
-        ...p,
-        roles: (userRoles ?? [])
-          .filter((r) => r.user_id === p.id)
-          .map((r) => r.role as AppRole),
-      })),
-    );
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    void load();
-  }, []);
-
-  const setRole = async (userId: string, role: AppRole, current: AppRole[]) => {
-    const { error: delError } = await supabase.from("user_roles").delete().eq("user_id", userId);
-    if (delError) {
-      toast.error("Não foi possível atualizar o papel", { description: delError.message });
-      return;
-    }
-    const { error } = await supabase.from("user_roles").insert({ user_id: userId, role });
-    if (error) {
-      toast.error("Não foi possível atualizar o papel", { description: error.message });
-      if (current[0]) await supabase.from("user_roles").insert({ user_id: userId, role: current[0] });
-      return;
-    }
-    toast.success(`Papel atualizado para ${ROLE_LABELS[role]}`);
-    void load();
-  };
-
-  return (
-    <section className="mt-12 rounded-xl border border-border p-6 shadow-card">
-      <h2 className="font-semibold">Gestão de papéis</h2>
-      <p className="mt-2 text-sm text-muted-foreground">
-        Defina o papel de cada usuário do portal.
-      </p>
-      {loading ? (
-        <p className="mt-6 text-sm text-muted-foreground">Carregando usuários…</p>
-      ) : (
-        <ul className="mt-6 divide-y divide-border">
-          {rows.map((row) => (
-            <li key={row.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
-              <div>
-                <p className="text-sm font-medium">{row.full_name ?? "Sem nome"}</p>
-                <p className="text-xs text-muted-foreground">{row.company ?? "—"}</p>
-              </div>
-              <Select
-                value={row.roles[0] ?? ""}
-                onValueChange={(value) => setRole(row.id, value as AppRole, row.roles)}
-              >
-                <SelectTrigger className="w-48">
-                  <SelectValue placeholder="Selecionar papel" />
-                </SelectTrigger>
-                <SelectContent>
-                  {ALL_ROLES.map((r) => (
-                    <SelectItem key={r} value={r}>
-                      {ROLE_LABELS[r]}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </li>
-          ))}
-        </ul>
-      )}
-    </section>
-  );
-}

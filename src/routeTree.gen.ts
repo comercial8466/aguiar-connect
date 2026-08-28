@@ -22,10 +22,13 @@ import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AuthenticatedChamadosRouteImport } from './routes/_authenticated/chamados'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
+import { Route as AuthenticatedSegurancaContaRouteImport } from './routes/_authenticated/seguranca-conta'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as ServicosAutomacaoComercialRouteImport } from './routes/servicos.automacao-comercial'
 import { Route as ServicosConsultoriaRouteImport } from './routes/servicos.consultoria'
 import { Route as ServicosSuporteRemotoRouteImport } from './routes/servicos.suporte-remoto'
+import { Route as AuthenticatedAdminAuditoriaRouteImport } from './routes/_authenticated/admin.auditoria'
+import { Route as AuthenticatedAdminSegurancaRouteImport } from './routes/_authenticated/admin.seguranca'
 import { Route as AuthenticatedAdminUsuariosRouteImport } from './routes/_authenticated/admin.usuarios'
 import { Route as AuthenticatedChamadosTicketIdRouteImport } from './routes/_authenticated/chamados.$ticketId'
 
@@ -93,6 +96,12 @@ const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   path: '/painel',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedSegurancaContaRoute =
+  AuthenticatedSegurancaContaRouteImport.update({
+    id: '/seguranca-conta',
+    path: '/seguranca-conta',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const ServicosIndexRoute = ServicosIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -114,6 +123,18 @@ const ServicosSuporteRemotoRoute = ServicosSuporteRemotoRouteImport.update({
   path: '/suporte-remoto',
   getParentRoute: () => ServicosRoute,
 } as any)
+const AuthenticatedAdminAuditoriaRoute =
+  AuthenticatedAdminAuditoriaRouteImport.update({
+    id: '/admin/auditoria',
+    path: '/admin/auditoria',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminSegurancaRoute =
+  AuthenticatedAdminSegurancaRouteImport.update({
+    id: '/admin/seguranca',
+    path: '/admin/seguranca',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminUsuariosRoute =
   AuthenticatedAdminUsuariosRouteImport.update({
     id: '/admin/usuarios',
@@ -140,10 +161,13 @@ export interface FileRoutesByFullPath {
   '/termos': typeof TermosRoute
   '/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/painel': typeof AuthenticatedPainelRoute
+  '/seguranca-conta': typeof AuthenticatedSegurancaContaRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/admin/auditoria': typeof AuthenticatedAdminAuditoriaRoute
+  '/admin/seguranca': typeof AuthenticatedAdminSegurancaRoute
   '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
@@ -159,10 +183,13 @@ export interface FileRoutesByTo {
   '/termos': typeof TermosRoute
   '/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/painel': typeof AuthenticatedPainelRoute
+  '/seguranca-conta': typeof AuthenticatedSegurancaContaRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos': typeof ServicosIndexRoute
+  '/admin/auditoria': typeof AuthenticatedAdminAuditoriaRoute
+  '/admin/seguranca': typeof AuthenticatedAdminSegurancaRoute
   '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
@@ -181,10 +208,13 @@ export interface FileRoutesById {
   '/termos': typeof TermosRoute
   '/_authenticated/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
+  '/_authenticated/seguranca-conta': typeof AuthenticatedSegurancaContaRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/_authenticated/admin/auditoria': typeof AuthenticatedAdminAuditoriaRoute
+  '/_authenticated/admin/seguranca': typeof AuthenticatedAdminSegurancaRoute
   '/_authenticated/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/_authenticated/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
@@ -203,10 +233,13 @@ export interface FileRouteTypes {
     | '/termos'
     | '/chamados'
     | '/painel'
+    | '/seguranca-conta'
     | '/servicos/automacao-comercial'
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos/'
+    | '/admin/auditoria'
+    | '/admin/seguranca'
     | '/admin/usuarios'
     | '/chamados/$ticketId'
   fileRoutesByTo: FileRoutesByTo
@@ -222,10 +255,13 @@ export interface FileRouteTypes {
     | '/termos'
     | '/chamados'
     | '/painel'
+    | '/seguranca-conta'
     | '/servicos/automacao-comercial'
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos'
+    | '/admin/auditoria'
+    | '/admin/seguranca'
     | '/admin/usuarios'
     | '/chamados/$ticketId'
   id:
@@ -243,10 +279,13 @@ export interface FileRouteTypes {
     | '/termos'
     | '/_authenticated/chamados'
     | '/_authenticated/painel'
+    | '/_authenticated/seguranca-conta'
     | '/servicos/automacao-comercial'
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos/'
+    | '/_authenticated/admin/auditoria'
+    | '/_authenticated/admin/seguranca'
     | '/_authenticated/admin/usuarios'
     | '/_authenticated/chamados/$ticketId'
   fileRoutesById: FileRoutesById
@@ -358,6 +397,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPainelRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/seguranca-conta': {
+      id: '/_authenticated/seguranca-conta'
+      path: '/seguranca-conta'
+      fullPath: '/seguranca-conta'
+      preLoaderRoute: typeof AuthenticatedSegurancaContaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/servicos/': {
       id: '/servicos/'
       path: '/'
@@ -385,6 +431,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/servicos/suporte-remoto'
       preLoaderRoute: typeof ServicosSuporteRemotoRouteImport
       parentRoute: typeof ServicosRoute
+    }
+    '/_authenticated/admin/auditoria': {
+      id: '/_authenticated/admin/auditoria'
+      path: '/admin/auditoria'
+      fullPath: '/admin/auditoria'
+      preLoaderRoute: typeof AuthenticatedAdminAuditoriaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/seguranca': {
+      id: '/_authenticated/admin/seguranca'
+      path: '/admin/seguranca'
+      fullPath: '/admin/seguranca'
+      preLoaderRoute: typeof AuthenticatedAdminSegurancaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/admin/usuarios': {
       id: '/_authenticated/admin/usuarios'
@@ -419,12 +479,18 @@ const AuthenticatedChamadosRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedChamadosRoute: typeof AuthenticatedChamadosRouteWithChildren
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedSegurancaContaRoute: typeof AuthenticatedSegurancaContaRoute
+  AuthenticatedAdminAuditoriaRoute: typeof AuthenticatedAdminAuditoriaRoute
+  AuthenticatedAdminSegurancaRoute: typeof AuthenticatedAdminSegurancaRoute
   AuthenticatedAdminUsuariosRoute: typeof AuthenticatedAdminUsuariosRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChamadosRoute: AuthenticatedChamadosRouteWithChildren,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedSegurancaContaRoute: AuthenticatedSegurancaContaRoute,
+  AuthenticatedAdminAuditoriaRoute: AuthenticatedAdminAuditoriaRoute,
+  AuthenticatedAdminSegurancaRoute: AuthenticatedAdminSegurancaRoute,
   AuthenticatedAdminUsuariosRoute: AuthenticatedAdminUsuariosRoute,
 }
 
