@@ -27,6 +27,7 @@ import { Route as ServicosAutomacaoComercialRouteImport } from './routes/servico
 import { Route as ServicosConsultoriaRouteImport } from './routes/servicos.consultoria'
 import { Route as ServicosSuporteRemotoRouteImport } from './routes/servicos.suporte-remoto'
 import { Route as AuthenticatedAdminAuditoriaRouteImport } from './routes/_authenticated/admin.auditoria'
+import { Route as AuthenticatedAdminSegurancaRouteImport } from './routes/_authenticated/admin.seguranca'
 import { Route as AuthenticatedAdminUsuariosRouteImport } from './routes/_authenticated/admin.usuarios'
 import { Route as AuthenticatedChamadosTicketIdRouteImport } from './routes/_authenticated/chamados.$ticketId'
 
@@ -121,6 +122,12 @@ const AuthenticatedAdminAuditoriaRoute =
     path: '/admin/auditoria',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminSegurancaRoute =
+  AuthenticatedAdminSegurancaRouteImport.update({
+    id: '/admin/seguranca',
+    path: '/admin/seguranca',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminUsuariosRoute =
   AuthenticatedAdminUsuariosRouteImport.update({
     id: '/admin/usuarios',
@@ -152,6 +159,7 @@ export interface FileRoutesByFullPath {
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
   '/admin/auditoria': typeof AuthenticatedAdminAuditoriaRoute
+  '/admin/seguranca': typeof AuthenticatedAdminSegurancaRoute
   '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
@@ -172,6 +180,7 @@ export interface FileRoutesByTo {
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos': typeof ServicosIndexRoute
   '/admin/auditoria': typeof AuthenticatedAdminAuditoriaRoute
+  '/admin/seguranca': typeof AuthenticatedAdminSegurancaRoute
   '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
@@ -195,6 +204,7 @@ export interface FileRoutesById {
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
   '/_authenticated/admin/auditoria': typeof AuthenticatedAdminAuditoriaRoute
+  '/_authenticated/admin/seguranca': typeof AuthenticatedAdminSegurancaRoute
   '/_authenticated/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/_authenticated/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
@@ -218,6 +228,7 @@ export interface FileRouteTypes {
     | '/servicos/suporte-remoto'
     | '/servicos/'
     | '/admin/auditoria'
+    | '/admin/seguranca'
     | '/admin/usuarios'
     | '/chamados/$ticketId'
   fileRoutesByTo: FileRoutesByTo
@@ -238,6 +249,7 @@ export interface FileRouteTypes {
     | '/servicos/suporte-remoto'
     | '/servicos'
     | '/admin/auditoria'
+    | '/admin/seguranca'
     | '/admin/usuarios'
     | '/chamados/$ticketId'
   id:
@@ -260,6 +272,7 @@ export interface FileRouteTypes {
     | '/servicos/suporte-remoto'
     | '/servicos/'
     | '/_authenticated/admin/auditoria'
+    | '/_authenticated/admin/seguranca'
     | '/_authenticated/admin/usuarios'
     | '/_authenticated/chamados/$ticketId'
   fileRoutesById: FileRoutesById
@@ -406,6 +419,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminAuditoriaRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/seguranca': {
+      id: '/_authenticated/admin/seguranca'
+      path: '/admin/seguranca'
+      fullPath: '/admin/seguranca'
+      preLoaderRoute: typeof AuthenticatedAdminSegurancaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/usuarios': {
       id: '/_authenticated/admin/usuarios'
       path: '/admin/usuarios'
@@ -440,6 +460,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedChamadosRoute: typeof AuthenticatedChamadosRouteWithChildren
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedAdminAuditoriaRoute: typeof AuthenticatedAdminAuditoriaRoute
+  AuthenticatedAdminSegurancaRoute: typeof AuthenticatedAdminSegurancaRoute
   AuthenticatedAdminUsuariosRoute: typeof AuthenticatedAdminUsuariosRoute
 }
 
@@ -447,6 +468,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChamadosRoute: AuthenticatedChamadosRouteWithChildren,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedAdminAuditoriaRoute: AuthenticatedAdminAuditoriaRoute,
+  AuthenticatedAdminSegurancaRoute: AuthenticatedAdminSegurancaRoute,
   AuthenticatedAdminUsuariosRoute: AuthenticatedAdminUsuariosRoute,
 }
 
