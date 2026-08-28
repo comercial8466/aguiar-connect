@@ -34,10 +34,6 @@ export const Route = createFileRoute("/_authenticated/painel")({
   component: Painel,
 });
 
-const ALL_ROLES: AppRole[] = ["cliente", "empresa", "tecnico", "admin"];
-
-type ProfileRow = { id: string; full_name: string | null; company: string | null };
-
 function Painel() {
   const { user, roles, hasRole, hasAnyRole, signOut } = useAuth();
   const navigate = useNavigate();
