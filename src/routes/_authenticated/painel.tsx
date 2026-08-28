@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
-import { BarChart3, Building2, LifeBuoy, ShieldCheck, Ticket } from "lucide-react";
-import { toast } from "sonner";
-import { supabase } from "@/integrations/supabase/client";
-import { ROLE_LABELS, useAuth, type AppRole } from "@/hooks/useAuth";
+import {
+  BarChart3,
+  Building2,
+  KeyRound,
+  LifeBuoy,
+  ScrollText,
+  ShieldCheck,
+  Ticket,
+  Users,
+} from "lucide-react";
+import { ROLE_LABELS, useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 
 export const Route = createFileRoute("/_authenticated/painel")({
   head: () => ({
