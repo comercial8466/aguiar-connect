@@ -90,12 +90,12 @@ function Planos() {
                   ))}
                 </ul>
 
-                <Button variant="whatsapp" className="mt-6" asChild>
+                <Button variant="whatsapp" className="mt-6 w-full" asChild>
                   <a href={whatsappLink(msg)} target="_blank" rel="noopener noreferrer">
-                    <WhatsAppIcon aria-hidden="true" /> Escolher e falar com atendente
+                    <WhatsAppIcon aria-hidden="true" /> Escolher combo
                   </a>
                 </Button>
-                <PortalCta variant="outline" className="mt-2">
+                <PortalCta variant="outline" className="mt-2 w-full">
                   Abrir chamado no portal
                 </PortalCta>
               </article>
