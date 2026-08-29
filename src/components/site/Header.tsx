@@ -126,11 +126,9 @@ export function Header() {
                 Entrar
               </Link>
             )}
-            <Button variant="hero" className="mt-2" asChild>
-              <Link to="/abrir-chamado" onClick={() => setOpen(false)}>
-                Abrir Chamado Agora
-              </Link>
-            </Button>
+            <PortalCta variant="hero" className="mt-2" onNavigate={() => setOpen(false)}>
+              Abrir Chamado Agora
+            </PortalCta>
           </nav>
         </div>
       )}
