@@ -26,11 +26,18 @@ export const Route = createFileRoute("/auth")({
       },
     ],
   }),
+  validateSearch: (search: Record<string, unknown>) => ({
+    next: typeof search['next'] === "string" && search['next'].startsWith("/") ? search['next'] : "",
+  }),
   component: AuthPage,
 });
 
+const SAFE_TARGETS = ["/painel", "/chamados", "/seguranca-conta"] as const;
+
 function AuthPage() {
   const navigate = useNavigate();
+  const { next } = Route.useSearch();
+  const target = (SAFE_TARGETS as readonly string[]).includes(next) ? next : "/painel";
   const { session, loading } = useAuth();
   const [busy, setBusy] = useState(false);
   const [email, setEmail] = useState("");
@@ -40,7 +47,7 @@ function AuthPage() {
 
   useEffect(() => {
     if (!loading && session) {
-      void navigate({ to: "/painel", replace: true });
+      void navigate({ to: target, replace: true });
     }
   }, [loading, session, navigate]);
 
@@ -53,7 +60,7 @@ function AuthPage() {
       toast.error("Não foi possível entrar", { description: error.message });
       return;
     }
-    void navigate({ to: "/painel", replace: true });
+    void navigate({ to: target, replace: true });
   };
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -78,7 +85,7 @@ function AuthPage() {
       });
       return;
     }
-    void navigate({ to: "/painel", replace: true });
+    void navigate({ to: target, replace: true });
   };
 
   const handleGoogle = async () => {
@@ -92,7 +99,7 @@ function AuthPage() {
       return;
     }
     if (result.redirected) return;
-    void navigate({ to: "/painel", replace: true });
+    void navigate({ to: target, replace: true });
   };
 
   return (
