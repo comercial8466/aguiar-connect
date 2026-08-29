@@ -9,6 +9,7 @@ import { useAuth } from "@/hooks/useAuth";
 
 const nav = [
   { to: "/servicos", label: "Serviços" },
+  { to: "/planos", label: "Planos" },
   { to: "/portal", label: "Portal do Cliente" },
   { to: "/sobre", label: "Sobre" },
   { to: "/faq", label: "FAQ" },
