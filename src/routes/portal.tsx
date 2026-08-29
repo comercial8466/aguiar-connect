@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BarChart3, Clock, FileUp, MessageSquare, ShieldCheck, Users } from "lucide-react";
 import { PageHero } from "@/components/site/PageHero";
+import { PortalCta } from "@/components/site/PortalCta";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/portal")({
@@ -56,12 +57,8 @@ function Portal() {
             Empresa, Técnico e Gestor/Admin — cada um vê apenas as áreas do seu papel.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <Button variant="hero" size="lg" asChild>
-              <Link to="/auth">Entrar no portal</Link>
-            </Button>
-            <Button variant="heroOutline" size="lg" asChild>
-              <Link to="/abrir-chamado">Abrir chamado agora</Link>
-            </Button>
+            <PortalCta variant="hero" size="lg">Entrar no portal</PortalCta>
+            <PortalCta variant="heroOutline" size="lg">Abrir chamado agora</PortalCta>
           </div>
         </div>
       </div>

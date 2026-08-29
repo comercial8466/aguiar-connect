@@ -15,6 +15,7 @@ import { Route as AbrirChamadoRouteImport } from './routes/abrir-chamado'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as PlanosRouteImport } from './routes/planos'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as ServicosRouteImport } from './routes/servicos'
@@ -59,6 +60,11 @@ const ContatoRoute = ContatoRouteImport.update({
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanosRoute = PlanosRouteImport.update({
+  id: '/planos',
+  path: '/planos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PortalRoute = PortalRouteImport.update({
@@ -154,6 +160,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
+  '/planos': typeof PlanosRoute
   '/portal': typeof PortalRoute
   '/privacidade': typeof PrivacidadeRoute
   '/servicos': typeof ServicosRouteWithChildren
@@ -177,6 +184,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
+  '/planos': typeof PlanosRoute
   '/portal': typeof PortalRoute
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
@@ -201,6 +209,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/contato': typeof ContatoRoute
   '/faq': typeof FaqRoute
+  '/planos': typeof PlanosRoute
   '/portal': typeof PortalRoute
   '/privacidade': typeof PrivacidadeRoute
   '/servicos': typeof ServicosRouteWithChildren
@@ -226,6 +235,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contato'
     | '/faq'
+    | '/planos'
     | '/portal'
     | '/privacidade'
     | '/servicos'
@@ -249,6 +259,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contato'
     | '/faq'
+    | '/planos'
     | '/portal'
     | '/privacidade'
     | '/sobre'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/contato'
     | '/faq'
+    | '/planos'
     | '/portal'
     | '/privacidade'
     | '/servicos'
@@ -297,6 +309,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   ContatoRoute: typeof ContatoRoute
   FaqRoute: typeof FaqRoute
+  PlanosRoute: typeof PlanosRoute
   PortalRoute: typeof PortalRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
   ServicosRoute: typeof ServicosRouteWithChildren
@@ -346,6 +359,13 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/planos': {
+      id: '/planos'
+      path: '/planos'
+      fullPath: '/planos'
+      preLoaderRoute: typeof PlanosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/portal': {
@@ -522,6 +542,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   ContatoRoute: ContatoRoute,
   FaqRoute: FaqRoute,
+  PlanosRoute: PlanosRoute,
   PortalRoute: PortalRoute,
   PrivacidadeRoute: PrivacidadeRoute,
   ServicosRoute: ServicosRouteWithChildren,

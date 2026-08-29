@@ -43,7 +43,7 @@ function Painel() {
     await queryClient.cancelQueries();
     queryClient.clear();
     await signOut();
-    void navigate({ to: "/auth", replace: true });
+    void navigate({ to: "/auth", search: {}, replace: true });
   };
 
   return (
