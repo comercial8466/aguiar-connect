@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BarChart3, CheckCircle2, Clock, Headset, ListChecks, Monitor, Network, ShieldCheck, Store } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { PortalCta } from "@/components/site/PortalCta";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -71,8 +72,10 @@ const depoimentos = [
 ];
 
 function Home() {
+  const revealRef = useScrollReveal<HTMLDivElement>();
+
   return (
-    <>
+    <div ref={revealRef}>
       <section className="bg-hero-gradient text-primary-foreground">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:py-24 lg:grid-cols-2">
           <div>
@@ -122,7 +125,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20" aria-labelledby="servicos">
+      <section className="mx-auto max-w-6xl px-4 py-20" aria-labelledby="servicos" data-reveal>
         <h2 id="servicos" className="text-3xl font-bold text-primary">
           Nossos serviços
         </h2>
@@ -149,7 +152,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-secondary/60 py-20" aria-labelledby="portal">
+      <section className="bg-secondary/60 py-20" aria-labelledby="portal" data-reveal>
         <div className="mx-auto grid max-w-6xl gap-12 px-4 lg:grid-cols-2">
           <div>
             <h2 id="portal" className="text-3xl font-bold text-primary">
@@ -192,7 +195,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20" aria-labelledby="diferenciais">
+      <section className="mx-auto max-w-6xl px-4 py-20" aria-labelledby="diferenciais" data-reveal>
         <h2 id="diferenciais" className="text-3xl font-bold text-primary">
           Por que a AguiarT.I
         </h2>
@@ -207,7 +210,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-secondary/60 py-20" aria-labelledby="depoimentos">
+      <section className="bg-secondary/60 py-20" aria-labelledby="depoimentos" data-reveal>
         <div className="mx-auto max-w-6xl px-4">
           <h2 id="depoimentos" className="text-3xl font-bold text-primary">
             Quem confia na gente
@@ -223,7 +226,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20">
+      <section className="mx-auto max-w-6xl px-4 py-20" data-reveal>
         <div className="rounded-2xl bg-hero-gradient px-6 py-14 text-center text-primary-foreground">
           <h2 className="text-3xl font-bold">Precisa de suporte agora?</h2>
           <p className="mx-auto mt-3 max-w-xl text-primary-foreground/80">
@@ -239,6 +242,6 @@ function Home() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
