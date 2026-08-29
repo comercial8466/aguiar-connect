@@ -1,7 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BarChart3, CheckCircle2, Clock, Headset, ListChecks, Monitor, Network, ShieldCheck, Store } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { PortalCta } from "@/components/site/PortalCta";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import heroImage from "@/assets/hero-dashboard.jpg";
@@ -72,10 +70,8 @@ const depoimentos = [
 ];
 
 function Home() {
-  const revealRef = useScrollReveal<HTMLDivElement>();
-
   return (
-    <div ref={revealRef}>
+    <>
       <section className="bg-hero-gradient text-primary-foreground">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:py-24 lg:grid-cols-2">
           <div>
@@ -91,7 +87,9 @@ function Home() {
               e gestão de atendimento por dashboard.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <PortalCta variant="hero" size="xl">Abrir Chamado Agora</PortalCta>
+              <Button variant="hero" size="xl" asChild>
+                <Link to="/abrir-chamado">Abrir Chamado Agora</Link>
+              </Button>
               <Button variant="heroOutline" size="xl" asChild>
                 <a href={whatsappLink("Olá! Gostaria de falar com a AguiarT.I.")} target="_blank" rel="noopener noreferrer">
                   <WhatsAppIcon aria-hidden="true" /> Fale pelo WhatsApp
@@ -125,7 +123,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20" aria-labelledby="servicos" data-reveal>
+      <section className="mx-auto max-w-6xl px-4 py-20" aria-labelledby="servicos">
         <h2 id="servicos" className="text-3xl font-bold text-primary">
           Nossos serviços
         </h2>
@@ -152,7 +150,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-secondary/60 py-20" aria-labelledby="portal" data-reveal>
+      <section className="bg-secondary/60 py-20" aria-labelledby="portal">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 lg:grid-cols-2">
           <div>
             <h2 id="portal" className="text-3xl font-bold text-primary">
@@ -175,7 +173,9 @@ function Home() {
                 </li>
               ))}
             </ul>
-            <PortalCta variant="default" size="lg" className="mt-8">Acessar Portal</PortalCta>
+            <Button variant="default" size="lg" className="mt-8" asChild>
+              <Link to="/portal">Acessar Portal</Link>
+            </Button>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -195,7 +195,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20" aria-labelledby="diferenciais" data-reveal>
+      <section className="mx-auto max-w-6xl px-4 py-20" aria-labelledby="diferenciais">
         <h2 id="diferenciais" className="text-3xl font-bold text-primary">
           Por que a AguiarT.I
         </h2>
@@ -210,7 +210,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-secondary/60 py-20" aria-labelledby="depoimentos" data-reveal>
+      <section className="bg-secondary/60 py-20" aria-labelledby="depoimentos">
         <div className="mx-auto max-w-6xl px-4">
           <h2 id="depoimentos" className="text-3xl font-bold text-primary">
             Quem confia na gente
@@ -226,14 +226,16 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20" data-reveal>
+      <section className="mx-auto max-w-6xl px-4 py-20">
         <div className="rounded-2xl bg-hero-gradient px-6 py-14 text-center text-primary-foreground">
           <h2 className="text-3xl font-bold">Precisa de suporte agora?</h2>
           <p className="mx-auto mt-3 max-w-xl text-primary-foreground/80">
             Abra um chamado em menos de 1 minuto ou fale direto com um técnico pelo WhatsApp.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <PortalCta variant="hero" size="xl">Abrir Chamado Agora</PortalCta>
+            <Button variant="hero" size="xl" asChild>
+              <Link to="/abrir-chamado">Abrir Chamado Agora</Link>
+            </Button>
             <Button variant="heroOutline" size="xl" asChild>
               <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
                 <WhatsAppIcon aria-hidden="true" /> {WHATSAPP_DISPLAY}
@@ -242,6 +244,6 @@ function Home() {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }

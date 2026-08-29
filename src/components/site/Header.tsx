@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
-import { PortalCta } from "@/components/site/PortalCta";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-aguiarti.png";
 import { WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
@@ -9,7 +8,6 @@ import { useAuth } from "@/hooks/useAuth";
 
 const nav = [
   { to: "/servicos", label: "Serviços" },
-  { to: "/planos", label: "Planos" },
   { to: "/portal", label: "Portal do Cliente" },
   { to: "/sobre", label: "Sobre" },
   { to: "/faq", label: "FAQ" },
@@ -24,7 +22,7 @@ export function Header() {
   const handleSignOut = async () => {
     setOpen(false);
     await signOut();
-    void navigate({ to: "/auth", search: {}, replace: true });
+    void navigate({ to: "/auth", replace: true });
   };
 
   return (
@@ -74,7 +72,9 @@ export function Header() {
               <Link to="/auth">Entrar</Link>
             </Button>
           )}
-          <PortalCta variant="hero" size="default">Abrir Chamado Agora</PortalCta>
+          <Button variant="hero" size="default" asChild>
+            <Link to="/abrir-chamado">Abrir Chamado Agora</Link>
+          </Button>
         </div>
 
         <button
@@ -120,16 +120,18 @@ export function Header() {
               </>
             ) : (
               <Link
-                to="/auth" search={{}}
+                to="/auth"
                 onClick={() => setOpen(false)}
                 className="rounded-md px-2 py-2.5 text-sm font-medium text-foreground hover:bg-secondary"
               >
                 Entrar
               </Link>
             )}
-            <PortalCta variant="hero" className="mt-2" onNavigate={() => setOpen(false)}>
-              Abrir Chamado Agora
-            </PortalCta>
+            <Button variant="hero" className="mt-2" asChild>
+              <Link to="/abrir-chamado" onClick={() => setOpen(false)}>
+                Abrir Chamado Agora
+              </Link>
+            </Button>
           </nav>
         </div>
       )}

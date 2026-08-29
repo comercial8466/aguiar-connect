@@ -14,7 +14,6 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { WhatsAppFloat } from "@/components/site/WhatsAppFloat";
-import { ChatAgent } from "@/components/site/ChatAgent";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/hooks/useAuth";
 
@@ -139,7 +138,6 @@ function RootComponent() {
           </main>
           <Footer />
           <WhatsAppFloat />
-          <ChatAgent />
           <Toaster />
         </div>
       </AuthProvider>

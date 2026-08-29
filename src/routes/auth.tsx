@@ -26,19 +26,11 @@ export const Route = createFileRoute("/auth")({
       },
     ],
   }),
-  validateSearch: (search: Record<string, unknown>): { next?: string } =>
-    typeof search['next'] === "string" && search['next'].startsWith("/")
-      ? { next: search['next'] }
-      : {},
   component: AuthPage,
 });
 
-const SAFE_TARGETS = ["/painel", "/chamados", "/seguranca-conta"] as const;
-
 function AuthPage() {
   const navigate = useNavigate();
-  const { next } = Route.useSearch();
-  const target = next && (SAFE_TARGETS as readonly string[]).includes(next) ? next : "/painel";
   const { session, loading } = useAuth();
   const [busy, setBusy] = useState(false);
   const [email, setEmail] = useState("");
@@ -48,7 +40,7 @@ function AuthPage() {
 
   useEffect(() => {
     if (!loading && session) {
-      void navigate({ to: target as "/painel", replace: true });
+      void navigate({ to: "/painel", replace: true });
     }
   }, [loading, session, navigate]);
 
@@ -61,7 +53,7 @@ function AuthPage() {
       toast.error("Não foi possível entrar", { description: error.message });
       return;
     }
-    void navigate({ to: target as "/painel", replace: true });
+    void navigate({ to: "/painel", replace: true });
   };
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -86,13 +78,13 @@ function AuthPage() {
       });
       return;
     }
-    void navigate({ to: target as "/painel", replace: true });
+    void navigate({ to: "/painel", replace: true });
   };
 
   const handleGoogle = async () => {
     setBusy(true);
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: `${window.location.origin}/auth?next=${encodeURIComponent(target)}`,
+      redirect_uri: window.location.origin,
     });
     if (result.error) {
       setBusy(false);
@@ -100,7 +92,7 @@ function AuthPage() {
       return;
     }
     if (result.redirected) return;
-    void navigate({ to: target as "/painel", replace: true });
+    void navigate({ to: "/painel", replace: true });
   };
 
   return (
