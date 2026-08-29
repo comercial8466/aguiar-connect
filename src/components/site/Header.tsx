@@ -24,7 +24,7 @@ export function Header() {
   const handleSignOut = async () => {
     setOpen(false);
     await signOut();
-    void navigate({ to: "/auth", replace: true });
+    void navigate({ to: "/auth", search: {}, replace: true });
   };
 
   return (
@@ -120,7 +120,7 @@ export function Header() {
               </>
             ) : (
               <Link
-                to="/auth"
+                to="/auth" search={{}}
                 onClick={() => setOpen(false)}
                 className="rounded-md px-2 py-2.5 text-sm font-medium text-foreground hover:bg-secondary"
               >
