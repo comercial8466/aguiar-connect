@@ -47,7 +47,7 @@ function AuthPage() {
 
   useEffect(() => {
     if (!loading && session) {
-      void navigate({ to: target, replace: true });
+      void navigate({ to: target as "/painel", replace: true });
     }
   }, [loading, session, navigate]);
 
@@ -60,7 +60,7 @@ function AuthPage() {
       toast.error("Não foi possível entrar", { description: error.message });
       return;
     }
-    void navigate({ to: target, replace: true });
+    void navigate({ to: target as "/painel", replace: true });
   };
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -85,13 +85,13 @@ function AuthPage() {
       });
       return;
     }
-    void navigate({ to: target, replace: true });
+    void navigate({ to: target as "/painel", replace: true });
   };
 
   const handleGoogle = async () => {
     setBusy(true);
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
+      redirect_uri: `${window.location.origin}/auth?next=${encodeURIComponent(target)}`,
     });
     if (result.error) {
       setBusy(false);
@@ -99,7 +99,7 @@ function AuthPage() {
       return;
     }
     if (result.redirected) return;
-    void navigate({ to: target, replace: true });
+    void navigate({ to: target as "/painel", replace: true });
   };
 
   return (
