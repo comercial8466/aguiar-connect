@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BarChart3, CheckCircle2, Clock, Headset, ListChecks, Monitor, Network, ShieldCheck, Store } from "lucide-react";
+import { PortalCta } from "@/components/site/PortalCta";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import heroImage from "@/assets/hero-dashboard.jpg";
@@ -87,9 +88,7 @@ function Home() {
               e gestão de atendimento por dashboard.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button variant="hero" size="xl" asChild>
-                <Link to="/abrir-chamado">Abrir Chamado Agora</Link>
-              </Button>
+              <PortalCta variant="hero" size="xl">Abrir Chamado Agora</PortalCta>
               <Button variant="heroOutline" size="xl" asChild>
                 <a href={whatsappLink("Olá! Gostaria de falar com a AguiarT.I.")} target="_blank" rel="noopener noreferrer">
                   <WhatsAppIcon aria-hidden="true" /> Fale pelo WhatsApp
@@ -173,9 +172,7 @@ function Home() {
                 </li>
               ))}
             </ul>
-            <Button variant="default" size="lg" className="mt-8" asChild>
-              <Link to="/portal">Acessar Portal</Link>
-            </Button>
+            <PortalCta variant="default" size="lg" className="mt-8">Acessar Portal</PortalCta>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -233,9 +230,7 @@ function Home() {
             Abra um chamado em menos de 1 minuto ou fale direto com um técnico pelo WhatsApp.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button variant="hero" size="xl" asChild>
-              <Link to="/abrir-chamado">Abrir Chamado Agora</Link>
-            </Button>
+            <PortalCta variant="hero" size="xl">Abrir Chamado Agora</PortalCta>
             <Button variant="heroOutline" size="xl" asChild>
               <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
                 <WhatsAppIcon aria-hidden="true" /> {WHATSAPP_DISPLAY}

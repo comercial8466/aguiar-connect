@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
+import { PortalCta } from "@/components/site/PortalCta";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-aguiarti.png";
 import { WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
@@ -72,9 +73,7 @@ export function Header() {
               <Link to="/auth">Entrar</Link>
             </Button>
           )}
-          <Button variant="hero" size="default" asChild>
-            <Link to="/abrir-chamado">Abrir Chamado Agora</Link>
-          </Button>
+          <PortalCta variant="hero" size="default">Abrir Chamado Agora</PortalCta>
         </div>
 
         <button
