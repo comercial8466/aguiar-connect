@@ -21,6 +21,7 @@ import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AuthenticatedChamadosRouteImport } from './routes/_authenticated/chamados'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as ServicosAutomacaoComercialRouteImport } from './routes/servicos.automacao-comercial'
@@ -88,6 +89,11 @@ const AuthenticatedChamadosRoute = AuthenticatedChamadosRouteImport.update({
   path: '/chamados',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   id: '/painel',
   path: '/painel',
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
   '/chamados': typeof AuthenticatedChamadosRouteWithChildren
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
@@ -158,6 +165,7 @@ export interface FileRoutesByTo {
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
   '/chamados': typeof AuthenticatedChamadosRouteWithChildren
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
@@ -180,6 +188,7 @@ export interface FileRoutesById {
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
   '/_authenticated/chamados': typeof AuthenticatedChamadosRouteWithChildren
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
@@ -202,6 +211,7 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/termos'
     | '/chamados'
+    | '/dashboard'
     | '/painel'
     | '/servicos/automacao-comercial'
     | '/servicos/consultoria'
@@ -221,6 +231,7 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/termos'
     | '/chamados'
+    | '/dashboard'
     | '/painel'
     | '/servicos/automacao-comercial'
     | '/servicos/consultoria'
@@ -242,6 +253,7 @@ export interface FileRouteTypes {
     | '/sobre'
     | '/termos'
     | '/_authenticated/chamados'
+    | '/_authenticated/dashboard'
     | '/_authenticated/painel'
     | '/servicos/automacao-comercial'
     | '/servicos/consultoria'
@@ -351,6 +363,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedChamadosRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/painel': {
       id: '/_authenticated/painel'
       path: '/painel'
@@ -418,12 +437,14 @@ const AuthenticatedChamadosRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedChamadosRoute: typeof AuthenticatedChamadosRouteWithChildren
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedAdminUsuariosRoute: typeof AuthenticatedAdminUsuariosRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChamadosRoute: AuthenticatedChamadosRouteWithChildren,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedAdminUsuariosRoute: AuthenticatedAdminUsuariosRoute,
 }
