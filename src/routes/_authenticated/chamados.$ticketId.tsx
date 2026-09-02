@@ -141,7 +141,16 @@ function TicketDetail() {
     void load();
   };
 
-  const updateTicket = async (patch: Record<string, unknown>) => {
+  type TicketPatch = Partial<{
+    status: TicketStatus;
+    priority: TicketPriority;
+    assigned_to: string | null;
+    sla_due_at: string | null;
+    resolved_at: string | null;
+    first_response_at: string | null;
+  }>;
+
+  const updateTicket = async (patch: TicketPatch) => {
     const { error } = await supabase.from("tickets").update(patch).eq("id", ticketId);
     if (error) {
       toast.error("Não foi possível atualizar o chamado", { description: error.message });
@@ -236,7 +245,7 @@ function TicketDetail() {
               value={ticket.status}
               onValueChange={(v) =>
                 updateTicket({
-                  status: v,
+                  status: v as TicketStatus,
                   resolved_at:
                     v === "resolvido" || v === "fechado" ? new Date().toISOString() : null,
                 })
@@ -256,7 +265,7 @@ function TicketDetail() {
           </div>
           <div className="space-y-2">
             <Label>Prioridade</Label>
-            <Select value={ticket.priority} onValueChange={(v) => updateTicket({ priority: v })}>
+            <Select value={ticket.priority} onValueChange={(v) => updateTicket({ priority: v as TicketPriority })}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
