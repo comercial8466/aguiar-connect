@@ -141,7 +141,16 @@ function TicketDetail() {
     void load();
   };
 
-  const updateTicket = async (patch: Record<string, unknown>) => {
+  type TicketPatch = Partial<{
+    status: TicketStatus;
+    priority: TicketPriority;
+    assigned_to: string | null;
+    sla_due_at: string | null;
+    resolved_at: string | null;
+    first_response_at: string | null;
+  }>;
+
+  const updateTicket = async (patch: TicketPatch) => {
     const { error } = await supabase.from("tickets").update(patch).eq("id", ticketId);
     if (error) {
       toast.error("Não foi possível atualizar o chamado", { description: error.message });
