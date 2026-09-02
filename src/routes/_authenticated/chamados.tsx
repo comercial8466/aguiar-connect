@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -68,20 +68,49 @@ function Chamados() {
   const [description, setDescription] = useState("");
   const [file, setFile] = useState<File | null>(null);
 
-  const load = async () => {
-    setLoading(true);
+  const [live, setLive] = useState(false);
+  const [, setTick] = useState(0);
+
+  const load = useCallback(async (silent = false) => {
+    if (!silent) setLoading(true);
     const { data, error } = await supabase
       .from("tickets")
       .select("id, title, category, status, priority, sla_due_at, resolved_at, created_at")
       .order("created_at", { ascending: false });
-    if (error) toast.error("Não foi possível carregar os chamados", { description: error.message });
-    setTickets((data ?? []) as TicketRow[]);
+    if (error && !silent)
+      toast.error("Não foi possível carregar os chamados", { description: error.message });
+    if (!error) setTickets((data ?? []) as TicketRow[]);
     setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     void load();
-  }, []);
+  }, [load]);
+
+  // Atualização em tempo real: qualquer mudança de status/SLA/prioridade
+  // recarrega a lista sem precisar atualizar a página.
+  useEffect(() => {
+    const channel = supabase
+      .channel("tickets-realtime")
+      .on("postgres_changes", { event: "*", schema: "public", table: "tickets" }, () => {
+        void load(true);
+      })
+      .subscribe((status) => setLive(status === "SUBSCRIBED"));
+
+    return () => {
+      void supabase.removeChannel(channel);
+    };
+  }, [load]);
+
+  // Recalcula os contadores de SLA a cada 30s e faz um refresh de segurança
+  // caso o canal em tempo real não esteja conectado.
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setTick((n) => n + 1);
+      if (!live) void load(true);
+    }, 30_000);
+    return () => window.clearInterval(id);
+  }, [live, load]);
 
   const handleCreate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -140,7 +169,7 @@ function Chamados() {
     setDescription("");
     setFile(null);
     toast.success("Chamado aberto com sucesso");
-    void load();
+    void load(true);
   };
 
   return (
@@ -148,8 +177,18 @@ function Chamados() {
       <h1 className="font-display text-3xl font-bold text-primary">
         {staff ? "Fila de atendimento" : "Meus chamados"}
       </h1>
-      <p className="mt-2 text-sm text-muted-foreground">
+      <p className="mt-2 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
         Acompanhe o status e o prazo de SLA de cada atendimento.
+        <span
+          className="inline-flex items-center gap-1.5 rounded-full border border-border px-2 py-0.5 text-xs font-medium"
+          aria-live="polite"
+        >
+          <span
+            className={`h-2 w-2 rounded-full ${live ? "animate-pulse bg-accent" : "bg-muted-foreground"}`}
+            aria-hidden="true"
+          />
+          {live ? "Atualização em tempo real ativa" : "Sincronizando…"}
+        </span>
       </p>
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_380px]">
