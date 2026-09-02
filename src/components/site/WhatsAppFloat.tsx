@@ -1,11 +1,22 @@
 import { useState } from "react";
-import { Bot, MessageCircle } from "lucide-react";
+import { Bot } from "lucide-react";
+import { useNavigate } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
 import { whatsappLink } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { AguiarAgentModal } from "@/components/site/AguiarAgentModal";
 
 export function WhatsAppFloat() {
   const [isAgentOpen, setIsAgentOpen] = useState(false);
+  const navigate = useNavigate();
+
+  // Entra direto no portal: se já houver sessão vai para /chamados,
+  // caso contrário abre o cadastro rápido e volta para /chamados.
+  const entrarPeloWhats = async () => {
+    const { data } = await supabase.auth.getSession();
+    if (data.session) void navigate({ to: "/chamados" });
+    else void navigate({ to: "/auth", search: { next: "/chamados", via: "whatsapp" } });
+  };
 
   return (
     <>
@@ -27,6 +38,24 @@ export function WhatsAppFloat() {
               <span className="relative inline-flex h-4 w-4 rounded-full bg-accent text-[9px] font-bold text-accent-foreground items-center justify-center">
                 AI
               </span>
+            </span>
+          </button>
+        </div>
+
+        {/* Entrar no portal pelo WhatsApp */}
+        <div className="group relative flex items-center">
+          <span className="pointer-events-none absolute right-16 hidden whitespace-nowrap rounded-md bg-[oklch(0.72_0.19_150)] px-2.5 py-1 text-xs font-semibold text-white shadow-md transition-opacity duration-200 group-hover:block md:inline-block">
+            Entrar no portal pelo WhatsApp
+          </span>
+          <button
+            type="button"
+            onClick={() => void entrarPeloWhats()}
+            aria-label="Entrar no portal do cliente pelo WhatsApp e acompanhar meus chamados"
+            className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-[oklch(0.72_0.19_150)] text-white ring-2 ring-primary shadow-xl transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:h-14 md:w-14"
+          >
+            <WhatsAppIcon className="!h-6 !w-6 md:!h-7 md:!w-7" aria-hidden="true" />
+            <span className="absolute -top-1 -right-1 rounded-full bg-primary px-1.5 py-0.5 text-[9px] font-bold text-primary-foreground">
+              Portal
             </span>
           </button>
         </div>
