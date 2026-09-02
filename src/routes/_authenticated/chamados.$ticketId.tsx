@@ -245,7 +245,7 @@ function TicketDetail() {
               value={ticket.status}
               onValueChange={(v) =>
                 updateTicket({
-                  status: v,
+                  status: v as TicketStatus,
                   resolved_at:
                     v === "resolvido" || v === "fechado" ? new Date().toISOString() : null,
                 })
@@ -265,7 +265,7 @@ function TicketDetail() {
           </div>
           <div className="space-y-2">
             <Label>Prioridade</Label>
-            <Select value={ticket.priority} onValueChange={(v) => updateTicket({ priority: v })}>
+            <Select value={ticket.priority} onValueChange={(v) => updateTicket({ priority: v as TicketPriority })}>
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
