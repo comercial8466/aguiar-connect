@@ -27,6 +27,7 @@ import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
 import { Route as ServicosAutomacaoComercialRouteImport } from './routes/servicos.automacao-comercial'
 import { Route as ServicosConsultoriaRouteImport } from './routes/servicos.consultoria'
 import { Route as ServicosSuporteRemotoRouteImport } from './routes/servicos.suporte-remoto'
+import { Route as AuthenticatedAdminGestorRouteImport } from './routes/_authenticated/admin.gestor'
 import { Route as AuthenticatedAdminUsuariosRouteImport } from './routes/_authenticated/admin.usuarios'
 import { Route as AuthenticatedChamadosTicketIdRouteImport } from './routes/_authenticated/chamados.$ticketId'
 
@@ -120,6 +121,12 @@ const ServicosSuporteRemotoRoute = ServicosSuporteRemotoRouteImport.update({
   path: '/suporte-remoto',
   getParentRoute: () => ServicosRoute,
 } as any)
+const AuthenticatedAdminGestorRoute =
+  AuthenticatedAdminGestorRouteImport.update({
+    id: '/admin/gestor',
+    path: '/admin/gestor',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminUsuariosRoute =
   AuthenticatedAdminUsuariosRouteImport.update({
     id: '/admin/usuarios',
@@ -151,6 +158,7 @@ export interface FileRoutesByFullPath {
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/admin/gestor': typeof AuthenticatedAdminGestorRoute
   '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
@@ -171,6 +179,7 @@ export interface FileRoutesByTo {
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos': typeof ServicosIndexRoute
+  '/admin/gestor': typeof AuthenticatedAdminGestorRoute
   '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
@@ -194,6 +203,7 @@ export interface FileRoutesById {
   '/servicos/consultoria': typeof ServicosConsultoriaRoute
   '/servicos/suporte-remoto': typeof ServicosSuporteRemotoRoute
   '/servicos/': typeof ServicosIndexRoute
+  '/_authenticated/admin/gestor': typeof AuthenticatedAdminGestorRoute
   '/_authenticated/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/_authenticated/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
 }
@@ -217,6 +227,7 @@ export interface FileRouteTypes {
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos/'
+    | '/admin/gestor'
     | '/admin/usuarios'
     | '/chamados/$ticketId'
   fileRoutesByTo: FileRoutesByTo
@@ -237,6 +248,7 @@ export interface FileRouteTypes {
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos'
+    | '/admin/gestor'
     | '/admin/usuarios'
     | '/chamados/$ticketId'
   id:
@@ -259,6 +271,7 @@ export interface FileRouteTypes {
     | '/servicos/consultoria'
     | '/servicos/suporte-remoto'
     | '/servicos/'
+    | '/_authenticated/admin/gestor'
     | '/_authenticated/admin/usuarios'
     | '/_authenticated/chamados/$ticketId'
   fileRoutesById: FileRoutesById
@@ -405,6 +418,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicosSuporteRemotoRouteImport
       parentRoute: typeof ServicosRoute
     }
+    '/_authenticated/admin/gestor': {
+      id: '/_authenticated/admin/gestor'
+      path: '/admin/gestor'
+      fullPath: '/admin/gestor'
+      preLoaderRoute: typeof AuthenticatedAdminGestorRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/usuarios': {
       id: '/_authenticated/admin/usuarios'
       path: '/admin/usuarios'
@@ -439,6 +459,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedChamadosRoute: typeof AuthenticatedChamadosRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedAdminGestorRoute: typeof AuthenticatedAdminGestorRoute
   AuthenticatedAdminUsuariosRoute: typeof AuthenticatedAdminUsuariosRoute
 }
 
@@ -446,6 +467,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChamadosRoute: AuthenticatedChamadosRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedAdminGestorRoute: AuthenticatedAdminGestorRoute,
   AuthenticatedAdminUsuariosRoute: AuthenticatedAdminUsuariosRoute,
 }
 
