@@ -2,7 +2,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo-aguiarti.png";
+import logoAsset from "@/assets/logo-aguiarti.jpg.asset.json";
+const logo = logoAsset.url;
 import { WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
 import { useAuth } from "@/hooks/useAuth";
 
