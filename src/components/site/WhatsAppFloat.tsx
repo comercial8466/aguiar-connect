@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Bot } from "lucide-react";
 import { useNavigate } from "@tanstack/react-router";
-import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 import { whatsappLink } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { AguiarAgentModal } from "@/components/site/AguiarAgentModal";
@@ -9,12 +9,12 @@ import { AguiarAgentModal } from "@/components/site/AguiarAgentModal";
 export function WhatsAppFloat() {
   const [isAgentOpen, setIsAgentOpen] = useState(false);
   const navigate = useNavigate();
+  const { session } = useAuth();
 
   // Entra direto no portal: se já houver sessão vai para /chamados,
   // caso contrário abre o cadastro rápido e volta para /chamados.
-  const entrarPeloWhats = async () => {
-    const { data } = await supabase.auth.getSession();
-    if (data.session) void navigate({ to: "/chamados" });
+  const entrarPeloWhats = () => {
+    if (session) void navigate({ to: "/chamados" });
     else void navigate({ to: "/auth", search: { next: "/chamados", via: "whatsapp" } });
   };
 
@@ -49,7 +49,7 @@ export function WhatsAppFloat() {
           </span>
           <button
             type="button"
-            onClick={() => void entrarPeloWhats()}
+            onClick={entrarPeloWhats}
             aria-label="Entrar no portal do cliente pelo WhatsApp e acompanhar meus chamados"
             className="relative inline-flex h-12 w-12 items-center justify-center rounded-full bg-[oklch(0.72_0.19_150)] text-white ring-2 ring-primary shadow-xl transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:h-14 md:w-14"
           >

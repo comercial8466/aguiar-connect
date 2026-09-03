@@ -179,7 +179,7 @@ function AuthPage() {
         )}
 
         <div className="rounded-2xl border border-border p-6 shadow-card">
-          <Button variant="heroOutline" className="w-full" onClick={handleGoogle} disabled={busy}>
+          <Button variant="outline" className="w-full" onClick={handleGoogle} disabled={busy}>
             Continuar com Google
           </Button>
 
