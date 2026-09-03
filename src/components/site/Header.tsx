@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logoAsset from "@/assets/logo-aguiarti.jpg.asset.json";
+import logoAsset from "@/assets/aguiarti-mark.jpg.asset.json";
 const logo = logoAsset.url;
 import { WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
 import { useAuth } from "@/hooks/useAuth";
@@ -30,7 +30,7 @@ export function Header() {
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
         <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-          <img src={logo} alt="Logo AguiarT.I" width={40} height={40} className="h-9 w-9" />
+          <img src={logo} alt="Logo AguiarT.I" width={40} height={40} className="h-9 w-9 rounded object-cover" />
           <span className="font-display text-lg font-bold text-primary">
             Aguiar<span className="text-graphite">T.I</span>
           </span>

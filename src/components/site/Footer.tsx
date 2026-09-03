@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Mail, MapPin } from "lucide-react";
-import logoAsset from "@/assets/logo-aguiarti.jpg.asset.json";
+import logoAsset from "@/assets/aguiarti-mark.jpg.asset.json";
 const logo = logoAsset.url;
 import { SITE_CITY, SITE_EMAIL, WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
