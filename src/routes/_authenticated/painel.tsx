@@ -106,9 +106,13 @@ function Painel() {
             <BarChart3 className="h-5 w-5 text-primary" aria-hidden="true" />
             <h2 className="mt-3 font-semibold">Indicadores de gestão</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              TMA, TMR, % de SLA cumprido e volume de tickets por período.
+              TMA, TMR, % de SLA cumprido, satisfação e volume de tickets por período.
             </p>
+            <Button variant="hero" className="mt-4" asChild>
+              <Link to="/admin/gestor">Abrir painel do gestor</Link>
+            </Button>
           </section>
+
         )}
       </div>
 
