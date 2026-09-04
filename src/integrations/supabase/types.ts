@@ -47,6 +47,117 @@ export type Database = {
         }
         Relationships: []
       }
+      category_sla: {
+        Row: {
+          category: string
+          created_at: string
+          default_priority: Database["public"]["Enums"]["ticket_priority"]
+          id: string
+          resolution_hours: number
+          response_hours: number
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          default_priority?: Database["public"]["Enums"]["ticket_priority"]
+          id?: string
+          resolution_hours?: number
+          response_hours?: number
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          default_priority?: Database["public"]["Enums"]["ticket_priority"]
+          id?: string
+          resolution_hours?: number
+          response_hours?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      company_invites: {
+        Row: {
+          company: string
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          invited_by: string
+          role: Database["public"]["Enums"]["app_role"]
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          company: string
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id?: string
+          invited_by: string
+          role?: Database["public"]["Enums"]["app_role"]
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          company?: string
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          invited_by?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      company_sla_contracts: {
+        Row: {
+          alta_hours: number
+          baixa_hours: number
+          company: string
+          contract_end: string | null
+          contract_start: string | null
+          created_at: string
+          critica_hours: number
+          id: string
+          media_hours: number
+          notes: string | null
+          plan_name: string
+          updated_at: string
+        }
+        Insert: {
+          alta_hours?: number
+          baixa_hours?: number
+          company: string
+          contract_end?: string | null
+          contract_start?: string | null
+          created_at?: string
+          critica_hours?: number
+          id?: string
+          media_hours?: number
+          notes?: string | null
+          plan_name?: string
+          updated_at?: string
+        }
+        Update: {
+          alta_hours?: number
+          baixa_hours?: number
+          company?: string
+          contract_end?: string | null
+          contract_start?: string | null
+          created_at?: string
+          critica_hours?: number
+          id?: string
+          media_hours?: number
+          notes?: string | null
+          plan_name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           company: string | null
