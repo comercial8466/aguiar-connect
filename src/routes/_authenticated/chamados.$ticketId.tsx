@@ -148,7 +148,11 @@ function TicketDetail() {
     sla_due_at: string | null;
     resolved_at: string | null;
     first_response_at: string | null;
+    satisfaction_rating: number | null;
+    satisfaction_comment: string | null;
+    satisfaction_at: string | null;
   }>;
+
 
   const updateTicket = async (patch: TicketPatch) => {
     const { error } = await supabase.from("tickets").update(patch).eq("id", ticketId);
