@@ -57,8 +57,11 @@ type Ticket = {
   sla_due_at: string | null;
   first_response_at: string | null;
   resolved_at: string | null;
+  satisfaction_rating: number | null;
+  satisfaction_at: string | null;
   created_at: string;
 };
+
 
 type Comment = {
   id: string;
@@ -148,7 +151,11 @@ function TicketDetail() {
     sla_due_at: string | null;
     resolved_at: string | null;
     first_response_at: string | null;
+    satisfaction_rating: number | null;
+    satisfaction_comment: string | null;
+    satisfaction_at: string | null;
   }>;
+
 
   const updateTicket = async (patch: TicketPatch) => {
     const { error } = await supabase.from("tickets").update(patch).eq("id", ticketId);
@@ -218,6 +225,8 @@ function TicketDetail() {
   }
 
   const sla = slaState(ticket.sla_due_at, ticket.resolved_at);
+  const isOwner = user?.id === ticket.user_id;
+
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-16">
@@ -293,6 +302,41 @@ function TicketDetail() {
           </div>
         </section>
       )}
+
+      {isOwner && (ticket.status === "resolvido" || ticket.status === "fechado") && (
+        <section className="mt-8 rounded-xl border border-border p-6 shadow-card">
+          <h2 className="font-semibold">Como foi o atendimento?</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Sua nota alimenta o indicador de satisfação da equipe AguiarT.I.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Nota de satisfação">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <Button
+                key={star}
+                type="button"
+                size="sm"
+                variant={ticket.satisfaction_rating === star ? "hero" : "outline"}
+                aria-label={`Avaliar com ${star} estrela${star > 1 ? "s" : ""}`}
+                aria-pressed={ticket.satisfaction_rating === star}
+                onClick={() =>
+                  updateTicket({
+                    satisfaction_rating: star,
+                    satisfaction_at: new Date().toISOString(),
+                  })
+                }
+              >
+                {star} ★
+              </Button>
+            ))}
+          </div>
+          {ticket.satisfaction_rating && (
+            <p className="mt-3 text-xs text-muted-foreground">
+              Avaliação registrada em {formatDateTime(ticket.satisfaction_at)}. Obrigado!
+            </p>
+          )}
+        </section>
+      )}
+
 
       <section className="mt-10">
         <h2 className="font-semibold">Anexos</h2>
