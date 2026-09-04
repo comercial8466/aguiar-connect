@@ -225,6 +225,8 @@ function TicketDetail() {
   }
 
   const sla = slaState(ticket.sla_due_at, ticket.resolved_at);
+  const isOwner = user?.id === ticket.user_id;
+
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-16">
