@@ -86,8 +86,11 @@ function Painel() {
             <Building2 className="h-5 w-5 text-primary" aria-hidden="true" />
             <h2 className="mt-3 font-semibold">Área da empresa</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              Visão consolidada dos chamados da sua empresa e dos usuários vinculados.
+              Cadastro de usuários da empresa e SLA contratado.
             </p>
+            <Button variant="hero" className="mt-4" asChild>
+              <Link to="/empresa">Abrir área da empresa</Link>
+            </Button>
           </section>
         )}
 
@@ -98,6 +101,9 @@ function Painel() {
             <p className="mt-2 text-sm text-muted-foreground">
               Chamados atribuídos, prazos de resposta e histórico técnico.
             </p>
+            <Button variant="hero" className="mt-4" asChild>
+              <Link to="/tecnico">Abrir área do técnico</Link>
+            </Button>
           </section>
         )}
 
@@ -108,15 +114,18 @@ function Painel() {
             <p className="mt-2 text-sm text-muted-foreground">
               TMA, TMR, % de SLA cumprido, satisfação e volume de tickets por período.
             </p>
-            <Button variant="hero" className="mt-4" asChild>
-              <Link to="/admin/gestor">Abrir painel do gestor</Link>
-            </Button>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <Button variant="hero" asChild>
+                <Link to="/admin/gestor">Painel do gestor</Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link to="/admin/configuracoes">Configurações do portal</Link>
+              </Button>
+            </div>
           </section>
-
         )}
       </div>
 
-      {hasRole("admin") && <AdminUsers />}
 
       {!hasRole("admin") && (
         <p className="mt-10 flex items-center gap-2 text-xs text-muted-foreground">
