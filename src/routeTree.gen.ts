@@ -22,6 +22,7 @@ import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TermosRouteImport } from './routes/termos'
 import { Route as AuthenticatedChamadosRouteImport } from './routes/_authenticated/chamados'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedEmpresaRouteImport } from './routes/_authenticated/empresa'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
 import { Route as AuthenticatedTecnicoRouteImport } from './routes/_authenticated/tecnico'
 import { Route as ServicosIndexRouteImport } from './routes/servicos.index'
@@ -96,6 +97,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedEmpresaRoute = AuthenticatedEmpresaRouteImport.update({
+  id: '/empresa',
+  path: '/empresa',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   id: '/painel',
   path: '/painel',
@@ -159,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/termos': typeof TermosRoute
   '/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/empresa': typeof AuthenticatedEmpresaRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/tecnico': typeof AuthenticatedTecnicoRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
@@ -181,6 +188,7 @@ export interface FileRoutesByTo {
   '/termos': typeof TermosRoute
   '/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/empresa': typeof AuthenticatedEmpresaRoute
   '/painel': typeof AuthenticatedPainelRoute
   '/tecnico': typeof AuthenticatedTecnicoRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
@@ -206,6 +214,7 @@ export interface FileRoutesById {
   '/termos': typeof TermosRoute
   '/_authenticated/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/empresa': typeof AuthenticatedEmpresaRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
   '/_authenticated/tecnico': typeof AuthenticatedTecnicoRoute
   '/servicos/automacao-comercial': typeof ServicosAutomacaoComercialRoute
@@ -231,6 +240,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/chamados'
     | '/dashboard'
+    | '/empresa'
     | '/painel'
     | '/tecnico'
     | '/servicos/automacao-comercial'
@@ -253,6 +263,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/chamados'
     | '/dashboard'
+    | '/empresa'
     | '/painel'
     | '/tecnico'
     | '/servicos/automacao-comercial'
@@ -277,6 +288,7 @@ export interface FileRouteTypes {
     | '/termos'
     | '/_authenticated/chamados'
     | '/_authenticated/dashboard'
+    | '/_authenticated/empresa'
     | '/_authenticated/painel'
     | '/_authenticated/tecnico'
     | '/servicos/automacao-comercial'
@@ -395,6 +407,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/empresa': {
+      id: '/_authenticated/empresa'
+      path: '/empresa'
+      fullPath: '/empresa'
+      preLoaderRoute: typeof AuthenticatedEmpresaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/painel': {
       id: '/_authenticated/painel'
       path: '/painel'
@@ -477,6 +496,7 @@ const AuthenticatedChamadosRouteWithChildren =
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedChamadosRoute: typeof AuthenticatedChamadosRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedEmpresaRoute: typeof AuthenticatedEmpresaRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
   AuthenticatedTecnicoRoute: typeof AuthenticatedTecnicoRoute
   AuthenticatedAdminGestorRoute: typeof AuthenticatedAdminGestorRoute
@@ -486,6 +506,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedChamadosRoute: AuthenticatedChamadosRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedEmpresaRoute: AuthenticatedEmpresaRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
   AuthenticatedTecnicoRoute: AuthenticatedTecnicoRoute,
   AuthenticatedAdminGestorRoute: AuthenticatedAdminGestorRoute,
