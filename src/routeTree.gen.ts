@@ -20,6 +20,7 @@ import { Route as PrivacidadeRouteImport } from './routes/privacidade'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TermosRouteImport } from './routes/termos'
+import { Route as AuthenticatedAtendimentoWhatsappRouteImport } from './routes/_authenticated/atendimento-whatsapp'
 import { Route as AuthenticatedChamadosRouteImport } from './routes/_authenticated/chamados'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedEmpresaRouteImport } from './routes/_authenticated/empresa'
@@ -88,6 +89,12 @@ const TermosRoute = TermosRouteImport.update({
   path: '/termos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAtendimentoWhatsappRoute =
+  AuthenticatedAtendimentoWhatsappRouteImport.update({
+    id: '/atendimento-whatsapp',
+    path: '/atendimento-whatsapp',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedChamadosRoute = AuthenticatedChamadosRouteImport.update({
   id: '/chamados',
   path: '/chamados',
@@ -170,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/servicos': typeof ServicosRouteWithChildren
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
+  '/atendimento-whatsapp': typeof AuthenticatedAtendimentoWhatsappRoute
   '/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/empresa': typeof AuthenticatedEmpresaRoute
@@ -194,6 +202,7 @@ export interface FileRoutesByTo {
   '/privacidade': typeof PrivacidadeRoute
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
+  '/atendimento-whatsapp': typeof AuthenticatedAtendimentoWhatsappRoute
   '/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRoute
   '/empresa': typeof AuthenticatedEmpresaRoute
@@ -221,6 +230,7 @@ export interface FileRoutesById {
   '/servicos': typeof ServicosRouteWithChildren
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
+  '/_authenticated/atendimento-whatsapp': typeof AuthenticatedAtendimentoWhatsappRoute
   '/_authenticated/chamados': typeof AuthenticatedChamadosRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/empresa': typeof AuthenticatedEmpresaRoute
@@ -248,6 +258,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/sobre'
     | '/termos'
+    | '/atendimento-whatsapp'
     | '/chamados'
     | '/dashboard'
     | '/empresa'
@@ -272,6 +283,7 @@ export interface FileRouteTypes {
     | '/privacidade'
     | '/sobre'
     | '/termos'
+    | '/atendimento-whatsapp'
     | '/chamados'
     | '/dashboard'
     | '/empresa'
@@ -298,6 +310,7 @@ export interface FileRouteTypes {
     | '/servicos'
     | '/sobre'
     | '/termos'
+    | '/_authenticated/atendimento-whatsapp'
     | '/_authenticated/chamados'
     | '/_authenticated/dashboard'
     | '/_authenticated/empresa'
@@ -405,6 +418,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/termos'
       preLoaderRoute: typeof TermosRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/atendimento-whatsapp': {
+      id: '/_authenticated/atendimento-whatsapp'
+      path: '/atendimento-whatsapp'
+      fullPath: '/atendimento-whatsapp'
+      preLoaderRoute: typeof AuthenticatedAtendimentoWhatsappRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/chamados': {
       id: '/_authenticated/chamados'
@@ -514,6 +534,7 @@ const AuthenticatedChamadosRouteWithChildren =
   )
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAtendimentoWhatsappRoute: typeof AuthenticatedAtendimentoWhatsappRoute
   AuthenticatedChamadosRoute: typeof AuthenticatedChamadosRouteWithChildren
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedEmpresaRoute: typeof AuthenticatedEmpresaRoute
@@ -525,6 +546,7 @@ interface AuthenticatedRouteRouteChildren {
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAtendimentoWhatsappRoute: AuthenticatedAtendimentoWhatsappRoute,
   AuthenticatedChamadosRoute: AuthenticatedChamadosRouteWithChildren,
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedEmpresaRoute: AuthenticatedEmpresaRoute,
