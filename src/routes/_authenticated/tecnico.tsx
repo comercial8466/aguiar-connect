@@ -76,6 +76,12 @@ function AreaTecnico() {
   const [comments, setComments] = useState<CommentRow[]>([]);
   const [contracts, setContracts] = useState<Contract[]>([]);
   const [loading, setLoading] = useState(true);
+  const [, setTick] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setTick((n) => n + 1), 30_000);
+    return () => clearInterval(id);
+  }, []);
 
   const load = async () => {
     setLoading(true);
@@ -357,8 +363,8 @@ function TicketLine({ ticket, action }: { ticket: TicketRow; action?: React.Reac
           {ticket.title}
         </Link>
         <p className="mt-1 text-xs text-muted-foreground">
-          {ticket.company?.trim() || "Sem empresa"} · {ticket.category} ·{" "}
-          {formatDateTime(ticket.created_at)}
+          {ticket.company?.trim() || "Sem empresa"} · {ticket.category} · aberto em{" "}
+          {formatDateTime(ticket.created_at)} · prazo {formatDateTime(ticket.sla_due_at)}
         </p>
       </div>
       <div className="flex flex-wrap items-center gap-2">
