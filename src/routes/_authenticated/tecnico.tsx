@@ -136,7 +136,7 @@ function AreaTecnico() {
   }, [assigned]);
 
   const takeTicket = async (id: string) => {
-    const { error } = await supabase.from("tickets").update({ assigned_to: user?.id }).eq("id", id);
+    const { error } = await supabase.from("tickets").update({ assigned_to: user?.id ?? null }).eq("id", id);
     if (error) {
       toast.error("Não foi possível assumir o chamado", { description: error.message });
       return;
