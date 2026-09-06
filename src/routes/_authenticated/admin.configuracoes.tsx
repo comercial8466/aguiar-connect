@@ -165,7 +165,7 @@ function AdminConfiguracoes() {
             <Link to="/admin/gestor">Indicadores</Link>
           </Button>
           <Button variant="outline" asChild>
-            <Link to="/admin/auditoria">Auditoria</Link>
+            <Link to="/admin/usuarios">Usuários</Link>
           </Button>
         </div>
       </div>
