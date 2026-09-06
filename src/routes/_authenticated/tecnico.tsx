@@ -76,6 +76,12 @@ function AreaTecnico() {
   const [comments, setComments] = useState<CommentRow[]>([]);
   const [contracts, setContracts] = useState<Contract[]>([]);
   const [loading, setLoading] = useState(true);
+  const [, setTick] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => setTick((n) => n + 1), 30_000);
+    return () => clearInterval(id);
+  }, []);
 
   const load = async () => {
     setLoading(true);
