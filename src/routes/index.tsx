@@ -80,7 +80,7 @@ function Home() {
               Atendimento 24/7 · SLA garantido
             </span>
             <h1 className="mt-5 text-4xl font-extrabold leading-tight md:text-5xl">
-              AguiarT.I: tecnologia que impulsiona o seu negócio
+              AguiarT.I: Tecnologia que Impulsiona o seu negócio
             </h1>
             <p className="mt-5 max-w-xl text-lg text-primary-foreground/80">
               Especialistas em Automação Comercial e Suporte Técnico Remoto, com abertura de chamados
