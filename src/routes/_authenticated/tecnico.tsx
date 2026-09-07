@@ -176,9 +176,14 @@ function AreaTecnico() {
             Chamados atribuídos a você, histórico de interações e SLA por cliente.
           </p>
         </div>
-        <Button variant="outline" onClick={() => void load()}>
-          Atualizar
-        </Button>
+        <div className="flex flex-wrap gap-2">
+          <Button variant="hero" asChild>
+            <Link to="/atendimento-whatsapp">Atendimento por WhatsApp</Link>
+          </Button>
+          <Button variant="outline" onClick={() => void load()}>
+            Atualizar
+          </Button>
+        </div>
       </div>
 
       <div className="mt-8 grid gap-4 sm:grid-cols-3">
