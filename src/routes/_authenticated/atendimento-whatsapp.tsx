@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import WhatsAppIcon from "@/components/site/WhatsAppIcon";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import {
   PRIORITY_LABELS,
   STATUS_LABELS,
