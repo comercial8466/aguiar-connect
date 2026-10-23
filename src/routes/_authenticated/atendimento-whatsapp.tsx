@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
+import { WHATSAPP_NUMBER } from "@/lib/site";
 import {
   PRIORITY_LABELS,
   STATUS_LABELS,
@@ -168,7 +169,7 @@ function AtendimentoWhatsApp() {
 
   useEffect(() => {
     if (!selected) return;
-    setPhone(profiles[selected.user_id]?.phone ?? "");
+    setPhone(profiles[selected.user_id]?.phone?.trim() || WHATSAPP_NUMBER);
     setMessage("");
   }, [selected?.id, profiles]);
 
