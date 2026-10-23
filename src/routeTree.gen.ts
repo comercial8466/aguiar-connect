@@ -33,6 +33,7 @@ import { Route as ServicosSuporteRemotoRouteImport } from './routes/servicos.sup
 import { Route as AuthenticatedAdminChamadosRouteImport } from './routes/_authenticated/admin.chamados'
 import { Route as AuthenticatedAdminConfiguracoesRouteImport } from './routes/_authenticated/admin.configuracoes'
 import { Route as AuthenticatedAdminGestorRouteImport } from './routes/_authenticated/admin.gestor'
+import { Route as AuthenticatedAdminTempoRealRouteImport } from './routes/_authenticated/admin.tempo-real'
 import { Route as AuthenticatedAdminUsuariosRouteImport } from './routes/_authenticated/admin.usuarios'
 import { Route as AuthenticatedChamadosTicketIdRouteImport } from './routes/_authenticated/chamados.$ticketId'
 import { Route as ApiPublicPowerbiChamadosRouteImport } from './routes/api/public/powerbi/chamados'
@@ -161,6 +162,12 @@ const AuthenticatedAdminGestorRoute =
     path: '/admin/gestor',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedAdminTempoRealRoute =
+  AuthenticatedAdminTempoRealRouteImport.update({
+    id: '/admin/tempo-real',
+    path: '/admin/tempo-real',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const AuthenticatedAdminUsuariosRoute =
   AuthenticatedAdminUsuariosRouteImport.update({
     id: '/admin/usuarios',
@@ -204,6 +211,7 @@ export interface FileRoutesByFullPath {
   '/admin/chamados': typeof AuthenticatedAdminChamadosRoute
   '/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
   '/admin/gestor': typeof AuthenticatedAdminGestorRoute
+  '/admin/tempo-real': typeof AuthenticatedAdminTempoRealRoute
   '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
   '/api/public/powerbi/chamados': typeof ApiPublicPowerbiChamadosRoute
@@ -231,6 +239,7 @@ export interface FileRoutesByTo {
   '/admin/chamados': typeof AuthenticatedAdminChamadosRoute
   '/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
   '/admin/gestor': typeof AuthenticatedAdminGestorRoute
+  '/admin/tempo-real': typeof AuthenticatedAdminTempoRealRoute
   '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
   '/api/public/powerbi/chamados': typeof ApiPublicPowerbiChamadosRoute
@@ -261,6 +270,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/chamados': typeof AuthenticatedAdminChamadosRoute
   '/_authenticated/admin/configuracoes': typeof AuthenticatedAdminConfiguracoesRoute
   '/_authenticated/admin/gestor': typeof AuthenticatedAdminGestorRoute
+  '/_authenticated/admin/tempo-real': typeof AuthenticatedAdminTempoRealRoute
   '/_authenticated/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/_authenticated/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
   '/api/public/powerbi/chamados': typeof ApiPublicPowerbiChamadosRoute
@@ -291,6 +301,7 @@ export interface FileRouteTypes {
     | '/admin/chamados'
     | '/admin/configuracoes'
     | '/admin/gestor'
+    | '/admin/tempo-real'
     | '/admin/usuarios'
     | '/chamados/$ticketId'
     | '/api/public/powerbi/chamados'
@@ -318,6 +329,7 @@ export interface FileRouteTypes {
     | '/admin/chamados'
     | '/admin/configuracoes'
     | '/admin/gestor'
+    | '/admin/tempo-real'
     | '/admin/usuarios'
     | '/chamados/$ticketId'
     | '/api/public/powerbi/chamados'
@@ -347,6 +359,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/chamados'
     | '/_authenticated/admin/configuracoes'
     | '/_authenticated/admin/gestor'
+    | '/_authenticated/admin/tempo-real'
     | '/_authenticated/admin/usuarios'
     | '/_authenticated/chamados/$ticketId'
     | '/api/public/powerbi/chamados'
@@ -537,6 +550,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminGestorRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/admin/tempo-real': {
+      id: '/_authenticated/admin/tempo-real'
+      path: '/admin/tempo-real'
+      fullPath: '/admin/tempo-real'
+      preLoaderRoute: typeof AuthenticatedAdminTempoRealRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/admin/usuarios': {
       id: '/_authenticated/admin/usuarios'
       path: '/admin/usuarios'
@@ -584,6 +604,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminChamadosRoute: typeof AuthenticatedAdminChamadosRoute
   AuthenticatedAdminConfiguracoesRoute: typeof AuthenticatedAdminConfiguracoesRoute
   AuthenticatedAdminGestorRoute: typeof AuthenticatedAdminGestorRoute
+  AuthenticatedAdminTempoRealRoute: typeof AuthenticatedAdminTempoRealRoute
   AuthenticatedAdminUsuariosRoute: typeof AuthenticatedAdminUsuariosRoute
 }
 
@@ -597,6 +618,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminChamadosRoute: AuthenticatedAdminChamadosRoute,
   AuthenticatedAdminConfiguracoesRoute: AuthenticatedAdminConfiguracoesRoute,
   AuthenticatedAdminGestorRoute: AuthenticatedAdminGestorRoute,
+  AuthenticatedAdminTempoRealRoute: AuthenticatedAdminTempoRealRoute,
   AuthenticatedAdminUsuariosRoute: AuthenticatedAdminUsuariosRoute,
 }
 
