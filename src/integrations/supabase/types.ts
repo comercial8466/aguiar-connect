@@ -158,6 +158,39 @@ export type Database = {
         }
         Relationships: []
       }
+      powerbi_feed_tokens: {
+        Row: {
+          active: boolean
+          created_at: string
+          created_by: string
+          id: string
+          label: string
+          last_used_at: string | null
+          token: string
+          updated_at: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          created_by?: string
+          id?: string
+          label?: string
+          last_used_at?: string | null
+          token?: string
+          updated_at?: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          created_by?: string
+          id?: string
+          label?: string
+          last_used_at?: string | null
+          token?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           company: string | null
