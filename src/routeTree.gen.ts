@@ -35,6 +35,7 @@ import { Route as AuthenticatedAdminConfiguracoesRouteImport } from './routes/_a
 import { Route as AuthenticatedAdminGestorRouteImport } from './routes/_authenticated/admin.gestor'
 import { Route as AuthenticatedAdminUsuariosRouteImport } from './routes/_authenticated/admin.usuarios'
 import { Route as AuthenticatedChamadosTicketIdRouteImport } from './routes/_authenticated/chamados.$ticketId'
+import { Route as ApiPublicPowerbiChamadosRouteImport } from './routes/api/public/powerbi/chamados'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -172,6 +173,12 @@ const AuthenticatedChamadosTicketIdRoute =
     path: '/$ticketId',
     getParentRoute: () => AuthenticatedChamadosRoute,
   } as any)
+const ApiPublicPowerbiChamadosRoute =
+  ApiPublicPowerbiChamadosRouteImport.update({
+    id: '/api/public/powerbi/chamados',
+    path: '/api/public/powerbi/chamados',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -199,6 +206,7 @@ export interface FileRoutesByFullPath {
   '/admin/gestor': typeof AuthenticatedAdminGestorRoute
   '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
+  '/api/public/powerbi/chamados': typeof ApiPublicPowerbiChamadosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -225,6 +233,7 @@ export interface FileRoutesByTo {
   '/admin/gestor': typeof AuthenticatedAdminGestorRoute
   '/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
+  '/api/public/powerbi/chamados': typeof ApiPublicPowerbiChamadosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -254,6 +263,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/gestor': typeof AuthenticatedAdminGestorRoute
   '/_authenticated/admin/usuarios': typeof AuthenticatedAdminUsuariosRoute
   '/_authenticated/chamados/$ticketId': typeof AuthenticatedChamadosTicketIdRoute
+  '/api/public/powerbi/chamados': typeof ApiPublicPowerbiChamadosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -283,6 +293,7 @@ export interface FileRouteTypes {
     | '/admin/gestor'
     | '/admin/usuarios'
     | '/chamados/$ticketId'
+    | '/api/public/powerbi/chamados'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -309,6 +320,7 @@ export interface FileRouteTypes {
     | '/admin/gestor'
     | '/admin/usuarios'
     | '/chamados/$ticketId'
+    | '/api/public/powerbi/chamados'
   id:
     | '__root__'
     | '/'
@@ -337,6 +349,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/gestor'
     | '/_authenticated/admin/usuarios'
     | '/_authenticated/chamados/$ticketId'
+    | '/api/public/powerbi/chamados'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -351,6 +364,7 @@ export interface RootRouteChildren {
   ServicosRoute: typeof ServicosRouteWithChildren
   SobreRoute: typeof SobreRoute
   TermosRoute: typeof TermosRoute
+  ApiPublicPowerbiChamadosRoute: typeof ApiPublicPowerbiChamadosRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -537,6 +551,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedChamadosTicketIdRouteImport
       parentRoute: typeof AuthenticatedChamadosRoute
     }
+    '/api/public/powerbi/chamados': {
+      id: '/api/public/powerbi/chamados'
+      path: '/api/public/powerbi/chamados'
+      fullPath: '/api/public/powerbi/chamados'
+      preLoaderRoute: typeof ApiPublicPowerbiChamadosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -612,6 +633,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicosRoute: ServicosRouteWithChildren,
   SobreRoute: SobreRoute,
   TermosRoute: TermosRoute,
+  ApiPublicPowerbiChamadosRoute: ApiPublicPowerbiChamadosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

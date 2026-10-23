@@ -218,6 +218,9 @@ function PainelGestor() {
             </SelectContent>
           </Select>
           <Button variant="outline" asChild>
+            <Link to="/admin/tempo-real">Tempo real / Power BI</Link>
+          </Button>
+          <Button variant="outline" asChild>
             <Link to="/admin/chamados">Chamados e WhatsApp</Link>
           </Button>
           <Button variant="outline" asChild>
