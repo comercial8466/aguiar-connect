@@ -140,7 +140,10 @@ function TempoReal() {
 
   const createToken = async () => {
     const { error } = await supabase.from("powerbi_feed_tokens").insert({ label: "Power BI" });
-    if (error) return toast.error("Não foi possível criar o link", { description: error.message });
+    if (error) {
+      toast.error("Não foi possível criar o link", { description: error.message });
+      return;
+    }
     toast.success("Link do Power BI criado");
     void loadTokens();
   };
