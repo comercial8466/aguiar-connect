@@ -73,15 +73,24 @@ function AdminUsuarios() {
   }, [isAdmin]);
 
   const setRole = async (userId: string, role: AppRole) => {
-    const del = await supabase.from("user_roles").delete().eq("user_id", userId);
-    if (del.error) {
-      toast.error("Falha ao atualizar papel", { description: del.error.message });
-      return;
+    // Na própria conta, o papel Gestor/Admin é sempre mantido junto do novo papel.
+    const desired: AppRole[] = userId === user?.id ? Array.from(new Set<AppRole>([role, "admin"])) : [role];
+    const current = rows.find((r) => r.id === userId)?.roles ?? [];
+    const toRemove = current.filter((r) => !desired.includes(r));
+    if (toRemove.length) {
+      const del = await supabase.from("user_roles").delete().eq("user_id", userId).in("role", toRemove);
+      if (del.error) {
+        toast.error("Falha ao atualizar papel", { description: del.error.message });
+        return;
+      }
     }
-    const ins = await supabase.from("user_roles").insert({ user_id: userId, role });
-    if (ins.error) {
-      toast.error("Falha ao atribuir papel", { description: ins.error.message });
-      return;
+    const toAdd = desired.filter((r) => !current.includes(r));
+    if (toAdd.length) {
+      const ins = await supabase.from("user_roles").insert(toAdd.map((r) => ({ user_id: userId, role: r })));
+      if (ins.error) {
+        toast.error("Falha ao atribuir papel", { description: ins.error.message });
+        return;
+      }
     }
     toast.success(`Papel atualizado para ${ROLE_LABELS[role]}`);
     void load();
