@@ -1,0 +1,2 @@
+ALTER TABLE public.tickets VALIDATE CONSTRAINT tickets_open_has_no_resolved_at;
+ALTER TABLE public.tickets VALIDATE CONSTRAINT tickets_resolved_after_created;

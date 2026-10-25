@@ -22,6 +22,13 @@
       "when": 1792947138173,
       "tag": "0002_ticket_resolution_lifecycle",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1792947172169,
+      "tag": "0003_validate_ticket_resolution_checks",
+      "breakpoints": true
     }
   ]
 }
