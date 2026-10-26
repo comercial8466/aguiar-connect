@@ -40,24 +40,8 @@ export const Route = createFileRoute("/api/public/powerbi/chamados")({
           .limit(50000);
         if (error) return new Response("Erro ao ler chamados", { status: 500 });
 
-        const rows = (data ?? []).map((t) => ({
-          id: t.id,
-          titulo: t.title,
-          categoria: t.category,
-          empresa: t.company ?? "Sem empresa",
-          status: STATUS[t.status] ?? t.status,
-          prioridade: PRIORITY[t.priority] ?? t.priority,
-          atribuido: t.assigned_to ? "Sim" : "Não",
-          aberto_em: t.created_at,
-          atualizado_em: t.updated_at,
-          prazo_sla: t.sla_due_at,
-          primeira_resposta_em: t.first_response_at,
-          resolvido_em: t.resolved_at,
-          horas_ate_resposta: hours(t.created_at, t.first_response_at),
-          horas_ate_resolucao: hours(t.created_at, t.resolved_at),
-          situacao_sla: slaStatus(t.sla_due_at, t.resolved_at),
-          avaliacao: t.satisfaction_rating,
-        }));
+        const now = Date.now();
+        const rows = (data ?? []).map((t) => toExportRow(t, now));
 
         const headers = { "Cache-Control": "no-store" };
         if (parsed.data.format === "csv") {
