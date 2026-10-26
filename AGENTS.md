@@ -102,3 +102,5 @@ Ao expandir o agente ou adicionar novos tópicos de suporte, atualize `AGENT_TOP
 2. **Segurança & LGPD:** Validação rigorosa de anexos (MIME type e limite de 10MB definidos em `tickets.ts`). Nunca exponha senhas ou dados sensíveis em logs.
 3. **Tailwind v4:** Não crie arquivos `tailwind.config.js` legados; utilize o `@theme inline` em `src/styles.css`.
 4. **Sincronização com Lovable:** Mantenha os delimitadores `<!-- LOVABLE:BEGIN -->` intactos no topo deste arquivo.
+
+5. **Testes:** `bun run test` (Vitest). Regras de exportação do Power BI ficam em `src/lib/powerbi-export.ts` para serem testáveis; testes de banco em `tests/db/` rodam em transação com ROLLBACK e são pulados quando a conexão não pode alterar chamados.
