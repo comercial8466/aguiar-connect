@@ -3,7 +3,16 @@
 import { execFileSync } from "node:child_process";
 import { describe, expect, it } from "vitest";
 
-const hasDb = !!process.env.PGHOST;
+// Needs a database role allowed to UPDATE tickets (e.g. CI with a privileged PG* connection).
+function canUpdateTickets() {
+  if (!process.env.PGHOST) return false;
+  try {
+    return execFileSync("psql", ["-Atc", "select has_table_privilege('public.tickets','UPDATE')"], { encoding: "utf8" }).trim() === "t";
+  } catch {
+    return false;
+  }
+}
+const hasDb = canUpdateTickets();
 
 /** Runs SQL as a staff user inside BEGIN ... ROLLBACK and returns the last row's JSON value. */
 function runAsStaff(body: string): any {
@@ -26,8 +35,8 @@ ROLLBACK;
   return JSON.parse(lines[lines.length - 1]);
 }
 
-function expectFails(body: string) {
-  expect(() => runAsStaff(body)).toThrow();
+function expectFails(body: string, message: RegExp) {
+  expect(() => runAsStaff(body)).toThrow(message);
 }
 
 const ID = "(SELECT id FROM t_ids)";
@@ -82,12 +91,12 @@ describe.skipIf(!hasDb)("ticket resolution lifecycle (database)", () => {
   });
 
   it("a resolution date earlier than the opening date is rejected", () => {
-    expectFails(`UPDATE tickets SET status='resolvido', resolved_at = now() - interval '10 days' WHERE id=${ID};`);
+    expectFails(`UPDATE tickets SET status='resolvido', resolved_at = now() - interval '10 days' WHERE id=${ID};`, /tickets_resolved_after_created/);
   });
 
   it("status changes without a staff session are blocked", () => {
     expectFails(`
       SELECT set_config('request.jwt.claims', '{}', true) \\g /dev/null
-      UPDATE tickets SET status='resolvido' WHERE id=${ID};`);
+      UPDATE tickets SET status='resolvido' WHERE id=${ID};`, /Somente técnicos e gestores/);
   });
 });
