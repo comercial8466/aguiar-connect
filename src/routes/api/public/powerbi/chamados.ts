@@ -1,37 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
-
-const STATUS: Record<string, string> = {
-  aberto: "Aberto",
-  em_andamento: "Em andamento",
-  aguardando_cliente: "Aguardando cliente",
-  resolvido: "Resolvido",
-  fechado: "Fechado",
-};
-const PRIORITY: Record<string, string> = { baixa: "Baixa", media: "Média", alta: "Alta", critica: "Crítica" };
+import { csvCell, toExportRow } from "@/lib/powerbi-export";
 
 const query = z.object({
   token: z.string().regex(/^[a-f0-9]{48}$/),
   format: z.enum(["json", "csv"]).default("json"),
 });
-
-function hours(a: string | null, b: string | null) {
-  if (!a || !b) return null;
-  return Math.round(((new Date(b).getTime() - new Date(a).getTime()) / 3_600_000) * 100) / 100;
-}
-
-function slaStatus(due: string | null, resolved: string | null) {
-  if (!due) return "Sem SLA";
-  const ref = resolved ? new Date(resolved).getTime() : Date.now();
-  if (ref > new Date(due).getTime()) return "Fora do prazo";
-  return resolved ? "Cumprido" : "No prazo";
-}
-
-function csvCell(v: unknown) {
-  if (v === null || v === undefined) return "";
-  const s = String(v);
-  return /[;"\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-}
 
 export const Route = createFileRoute("/api/public/powerbi/chamados")({
   server: {
