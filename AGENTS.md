@@ -38,32 +38,9 @@ Este arquivo define os padrões de arquitetura, regras de negócio e boas práti
 
 ## 3. Estrutura de Diretórios
 
-```
-aguiar-connect-main/
-├── src/
-│   ├── assets/              # Logos, ícones e imagens estáticas
-│   ├── components/
-│   │   ├── site/            # Componentes públicos (Header, Footer, AguiarAgentModal, WhatsAppFloat)
-│   │   └── ui/              # Componentes de design system (Button, Badge, Input, Dialog, etc.)
-│   ├── hooks/               # Custom hooks (useAuth, use-mobile)
-│   ├── integrations/
-│   │   └── supabase/        # Cliente Supabase, tipos TypeScript e helpers de autenticação
-│   ├── lib/
-│   │   ├── agent-knowledge.ts # Base de conhecimento e motor de triagem do Agente Virtual
-│   │   ├── site.ts          # Constantes globais do site e link do WhatsApp
-│   │   ├── tickets.ts       # Regras de negócio de tickets, matriz de SLA e anexos
-│   │   └── utils.ts         # Utilitários de classes Tailwind (cn)
-│   ├── routes/              # Rotas baseadas em arquivo TanStack Router
-│   │   ├── _authenticated/  # Rotas protegidas (painel, chamados, admin)
-│   │   ├── __root.tsx       # Layout raiz da aplicação
-│   │   ├── abrir-chamado.tsx
-│   │   ├── auth.tsx
-│   │   └── index.tsx
-│   ├── styles.css           # Configurações de tema Tailwind v4 (@theme inline)
-├── supabase/
-│   ├── migrations/          # Migrações SQL e políticas de RLS
-└── AGENTS.md                # Este documento de referência
-```
+- `src/components/site` (público) e `src/components/ui` (design system); `src/hooks`; `src/integrations/supabase` (gerado).
+- `src/lib`: `agent-knowledge.ts`, `site.ts` (WhatsApp), `tickets.ts` (SLA, anexos), `powerbi-export.ts`.
+- `src/routes`: arquivos TanStack; rotas protegidas em `_authenticated/`. Migrações em `supabase/migrations/`.
 
 ---
 
@@ -102,3 +79,5 @@ Ao expandir o agente ou adicionar novos tópicos de suporte, atualize `AGENT_TOP
 2. **Segurança & LGPD:** Validação rigorosa de anexos (MIME type e limite de 10MB definidos em `tickets.ts`). Nunca exponha senhas ou dados sensíveis em logs.
 3. **Tailwind v4:** Não crie arquivos `tailwind.config.js` legados; utilize o `@theme inline` em `src/styles.css`.
 4. **Sincronização com Lovable:** Mantenha os delimitadores `<!-- LOVABLE:BEGIN -->` intactos no topo deste arquivo.
+
+5. **Testes:** `bun run test` (Vitest). Regras de exportação do Power BI ficam em `src/lib/powerbi-export.ts` para serem testáveis; testes de banco em `tests/db/` rodam em transação com ROLLBACK e são pulados quando a conexão não pode alterar chamados.

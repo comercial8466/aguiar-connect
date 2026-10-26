@@ -1,37 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
-
-const STATUS: Record<string, string> = {
-  aberto: "Aberto",
-  em_andamento: "Em andamento",
-  aguardando_cliente: "Aguardando cliente",
-  resolvido: "Resolvido",
-  fechado: "Fechado",
-};
-const PRIORITY: Record<string, string> = { baixa: "Baixa", media: "Média", alta: "Alta", critica: "Crítica" };
+import { csvCell, toExportRow } from "@/lib/powerbi-export";
 
 const query = z.object({
   token: z.string().regex(/^[a-f0-9]{48}$/),
   format: z.enum(["json", "csv"]).default("json"),
 });
-
-function hours(a: string | null, b: string | null) {
-  if (!a || !b) return null;
-  return Math.round(((new Date(b).getTime() - new Date(a).getTime()) / 3_600_000) * 100) / 100;
-}
-
-function slaStatus(due: string | null, resolved: string | null) {
-  if (!due) return "Sem SLA";
-  const ref = resolved ? new Date(resolved).getTime() : Date.now();
-  if (ref > new Date(due).getTime()) return "Fora do prazo";
-  return resolved ? "Cumprido" : "No prazo";
-}
-
-function csvCell(v: unknown) {
-  if (v === null || v === undefined) return "";
-  const s = String(v);
-  return /[;"\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-}
 
 export const Route = createFileRoute("/api/public/powerbi/chamados")({
   server: {
@@ -66,24 +40,8 @@ export const Route = createFileRoute("/api/public/powerbi/chamados")({
           .limit(50000);
         if (error) return new Response("Erro ao ler chamados", { status: 500 });
 
-        const rows = (data ?? []).map((t) => ({
-          id: t.id,
-          titulo: t.title,
-          categoria: t.category,
-          empresa: t.company ?? "Sem empresa",
-          status: STATUS[t.status] ?? t.status,
-          prioridade: PRIORITY[t.priority] ?? t.priority,
-          atribuido: t.assigned_to ? "Sim" : "Não",
-          aberto_em: t.created_at,
-          atualizado_em: t.updated_at,
-          prazo_sla: t.sla_due_at,
-          primeira_resposta_em: t.first_response_at,
-          resolvido_em: t.resolved_at,
-          horas_ate_resposta: hours(t.created_at, t.first_response_at),
-          horas_ate_resolucao: hours(t.created_at, t.resolved_at),
-          situacao_sla: slaStatus(t.sla_due_at, t.resolved_at),
-          avaliacao: t.satisfaction_rating,
-        }));
+        const now = Date.now();
+        const rows = (data ?? []).map((t) => toExportRow(t, now));
 
         const headers = { "Cache-Control": "no-store" };
         if (parsed.data.format === "csv") {
