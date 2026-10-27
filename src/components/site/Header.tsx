@@ -17,7 +17,7 @@ const nav = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const { session, signOut } = useAuth();
+  const { session, signOut, hasRole } = useAuth();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -61,6 +61,11 @@ export function Header() {
           </a>
           {session ? (
             <>
+              {hasRole("admin") && (
+                <Button variant="outline" size="default" asChild>
+                  <Link to="/admin/tempo-real" aria-label="Abrir dashboard Power BI">Dashboard Power BI</Link>
+                </Button>
+              )}
               <Button variant="outline" size="default" asChild>
                 <Link to="/painel">Meu painel</Link>
               </Button>
@@ -104,6 +109,15 @@ export function Header() {
             ))}
             {session ? (
               <>
+                {hasRole("admin") && (
+                  <Link
+                    to="/admin/tempo-real"
+                    onClick={() => setOpen(false)}
+                    className="rounded-md px-2 py-2.5 text-sm font-medium text-foreground hover:bg-secondary"
+                  >
+                    Dashboard Power BI
+                  </Link>
+                )}
                 <Link
                   to="/painel"
                   onClick={() => setOpen(false)}
