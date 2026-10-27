@@ -243,6 +243,32 @@ function AuthPage() {
                 <Button type="submit" variant="hero" className="w-full" disabled={busy}>
                   {busy ? "Entrando…" : "Entrar"}
                 </Button>
+                <button
+                  type="button"
+                  className="w-full text-center text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
+                  disabled={busy}
+                  onClick={async () => {
+                    const parsed = signInSchema.shape.email.safeParse(email);
+                    if (!parsed.success) {
+                      setErrors({ email: "Digite seu e-mail acima para redefinir a senha." });
+                      return;
+                    }
+                    setBusy(true);
+                    const { error } = await supabase.auth.resetPasswordForEmail(parsed.data, {
+                      redirectTo: `${window.location.origin}/redefinir-senha`,
+                    });
+                    setBusy(false);
+                    if (error) {
+                      toast.error("Não foi possível enviar", { description: friendlyAuthError(error.message) });
+                      return;
+                    }
+                    toast.success("Verifique seu e-mail", {
+                      description: "Enviamos um link para você criar uma nova senha.",
+                    });
+                  }}
+                >
+                  Esqueci minha senha
+                </button>
               </form>
             </TabsContent>
 
