@@ -118,6 +118,9 @@ function Painel() {
               <Button variant="hero" asChild>
                 <Link to="/admin/gestor">Painel do gestor</Link>
               </Button>
+              <Button variant="hero" asChild>
+                <Link to="/admin/tempo-real">Dashboard Power BI</Link>
+              </Button>
               <Button variant="outline" asChild>
                 <Link to="/admin/configuracoes">Configurações do portal</Link>
               </Button>
