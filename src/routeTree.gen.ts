@@ -17,6 +17,7 @@ import { Route as ContatoRouteImport } from './routes/contato'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as PortalRouteImport } from './routes/portal'
 import { Route as PrivacidadeRouteImport } from './routes/privacidade'
+import { Route as RedefinirSenhaRouteImport } from './routes/redefinir-senha'
 import { Route as ServicosRouteImport } from './routes/servicos'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as TermosRouteImport } from './routes/termos'
@@ -75,6 +76,11 @@ const PortalRoute = PortalRouteImport.update({
 const PrivacidadeRoute = PrivacidadeRouteImport.update({
   id: '/privacidade',
   path: '/privacidade',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RedefinirSenhaRoute = RedefinirSenhaRouteImport.update({
+  id: '/redefinir-senha',
+  path: '/redefinir-senha',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicosRoute = ServicosRouteImport.update({
@@ -195,6 +201,7 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/portal': typeof PortalRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/redefinir-senha': typeof RedefinirSenhaRoute
   '/servicos': typeof ServicosRouteWithChildren
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
@@ -224,6 +231,7 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/portal': typeof PortalRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/redefinir-senha': typeof RedefinirSenhaRoute
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
   '/atendimento-whatsapp': typeof AuthenticatedAtendimentoWhatsappRoute
@@ -254,6 +262,7 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/portal': typeof PortalRoute
   '/privacidade': typeof PrivacidadeRoute
+  '/redefinir-senha': typeof RedefinirSenhaRoute
   '/servicos': typeof ServicosRouteWithChildren
   '/sobre': typeof SobreRoute
   '/termos': typeof TermosRoute
@@ -285,6 +294,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/portal'
     | '/privacidade'
+    | '/redefinir-senha'
     | '/servicos'
     | '/sobre'
     | '/termos'
@@ -314,6 +324,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/portal'
     | '/privacidade'
+    | '/redefinir-senha'
     | '/sobre'
     | '/termos'
     | '/atendimento-whatsapp'
@@ -343,6 +354,7 @@ export interface FileRouteTypes {
     | '/faq'
     | '/portal'
     | '/privacidade'
+    | '/redefinir-senha'
     | '/servicos'
     | '/sobre'
     | '/termos'
@@ -374,6 +386,7 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   PortalRoute: typeof PortalRoute
   PrivacidadeRoute: typeof PrivacidadeRoute
+  RedefinirSenhaRoute: typeof RedefinirSenhaRoute
   ServicosRoute: typeof ServicosRouteWithChildren
   SobreRoute: typeof SobreRoute
   TermosRoute: typeof TermosRoute
@@ -436,6 +449,13 @@ declare module '@tanstack/react-router' {
       path: '/privacidade'
       fullPath: '/privacidade'
       preLoaderRoute: typeof PrivacidadeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/redefinir-senha': {
+      id: '/redefinir-senha'
+      path: '/redefinir-senha'
+      fullPath: '/redefinir-senha'
+      preLoaderRoute: typeof RedefinirSenhaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/servicos': {
@@ -652,6 +672,7 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   PortalRoute: PortalRoute,
   PrivacidadeRoute: PrivacidadeRoute,
+  RedefinirSenhaRoute: RedefinirSenhaRoute,
   ServicosRoute: ServicosRouteWithChildren,
   SobreRoute: SobreRoute,
   TermosRoute: TermosRoute,
