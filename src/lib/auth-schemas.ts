@@ -68,6 +68,12 @@ export function friendlyAuthError(message: string): string {
   if (m.includes("invalid login credentials")) return "E-mail ou senha incorretos.";
   if (m.includes("email not confirmed"))
     return "Confirme seu e-mail antes de entrar. Verifique sua caixa de entrada.";
+  if (m.includes("known to be weak") || m.includes("pwned"))
+    return "Essa senha aparece em listas de senhas vazadas. Escolha outra, mais difícil de adivinhar (ex.: uma frase com números).";
+  if (m.includes("should be different"))
+    return "A nova senha precisa ser diferente da atual.";
+  if (m.includes("session missing") || m.includes("session_not_found") || m.includes("jwt"))
+    return "Link inválido ou expirado. Peça um novo em 'Esqueci minha senha'.";
   if (m.includes("password should be")) return "Senha muito fraca. Use ao menos 8 caracteres com letras e números.";
   if (m.includes("rate limit") || m.includes("too many"))
     return "Muitas tentativas em pouco tempo. Aguarde alguns minutos e tente novamente.";
