@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, useNavigate } from "@tanstack/react-router";
-import { Menu, Phone, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logoAsset from "@/assets/aguiarti-mark.jpg.asset.json";
 const logo = logoAsset.url;
-import { WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
+import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 import { useAuth } from "@/hooks/useAuth";
 
 const nav = [
@@ -14,6 +15,10 @@ const nav = [
   { to: "/faq", label: "FAQ" },
   { to: "/contato", label: "Contato" },
 ] as const;
+
+const navLinkClass =
+  "rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-primary";
+const navLinkActiveClass = "bg-secondary text-primary";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -36,13 +41,13 @@ export function Header() {
           </span>
         </Link>
 
-        <nav aria-label="Principal" className="hidden items-center gap-6 lg:flex">
+        <nav aria-label="Principal" className="hidden items-center gap-1 lg:flex">
           {nav.map((item) => (
             <Link
               key={item.to}
               to={item.to}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-              activeProps={{ className: "text-primary" }}
+              className={navLinkClass}
+              activeProps={{ className: navLinkActiveClass }}
             >
               {item.label}
             </Link>
@@ -54,10 +59,11 @@ export function Header() {
             href={whatsappLink()}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+            title="Falar no WhatsApp"
+            aria-label="Falar com a AguiarT.I no WhatsApp"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:border-primary/40 hover:bg-secondary hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
           >
-            <Phone className="h-4 w-4" aria-hidden="true" />
-            {WHATSAPP_DISPLAY}
+            <WhatsAppIcon className="h-4 w-4" />
           </a>
           {session ? (
             <>
@@ -107,6 +113,16 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setOpen(false)}
+              className="inline-flex items-center gap-2 rounded-md px-2 py-2.5 text-sm font-medium text-foreground hover:bg-secondary"
+            >
+              <WhatsAppIcon className="h-4 w-4" />
+              Falar no WhatsApp
+            </a>
             {session ? (
               <>
                 {hasRole("admin") && (
