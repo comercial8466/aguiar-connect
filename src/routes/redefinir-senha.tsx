@@ -5,6 +5,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { friendlyAuthError } from "@/lib/auth-schemas";
 import { PageHero } from "@/components/site/PageHero";
 
 export const Route = createFileRoute("/redefinir-senha")({
@@ -43,7 +44,7 @@ function ResetPage() {
     const { error: err } = await supabase.auth.updateUser({ password });
     setBusy(false);
     if (err) {
-      setError("Link inválido ou expirado. Peça um novo em 'Esqueci minha senha'.");
+      setError(friendlyAuthError(err.message));
       return;
     }
     toast.success("Senha alterada! Você já está no portal.");
