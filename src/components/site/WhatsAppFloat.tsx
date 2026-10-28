@@ -9,6 +9,10 @@ import { AguiarAgentModal } from "@/components/site/AguiarAgentModal";
 const labelBase =
   "pointer-events-none whitespace-nowrap rounded-md px-2 py-1 text-[11px] font-semibold shadow-md backdrop-blur";
 
+// Área de toque invisível: mantém o botão visualmente menor no celular
+// sem reduzir a área tocável (44px visíveis + 6px de respiro por lado).
+const touchArea = "after:absolute after:-inset-1.5 after:content-['']";
+
 export function WhatsAppFloat() {
   const [isAgentOpen, setIsAgentOpen] = useState(false);
   const navigate = useNavigate();
@@ -31,12 +35,12 @@ export function WhatsAppFloat() {
             type="button"
             onClick={() => setIsAgentOpen(true)}
             aria-label="Abrir Assistente Virtual AguiarT.I para triagem e suporte inteligente"
-            className="relative inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary text-accent-foreground ring-2 ring-accent shadow-xl transition-all duration-300 hover:scale-110 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:h-14 md:w-14"
+            className={`relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-accent-foreground ring-2 ring-accent shadow-xl transition-all duration-300 hover:scale-110 hover:bg-primary-dark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:h-14 md:w-14 ${touchArea}`}
           >
-            <Bot className="h-6 w-6 text-white md:h-7 md:w-7" aria-hidden="true" />
-            <span className="absolute -right-0.5 -top-0.5 flex h-2.5 w-2.5">
+            <Bot className="h-5 w-5 text-white md:h-7 md:w-7" aria-hidden="true" />
+            <span className="absolute -right-0.5 -top-0.5 flex h-2 w-2 md:h-2.5 md:w-2.5">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75"></span>
-              <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent md:h-2.5 md:w-2.5"></span>
             </span>
           </button>
         </div>
@@ -48,9 +52,9 @@ export function WhatsAppFloat() {
             type="button"
             onClick={entrarPeloWhats}
             aria-label="Entrar no portal do cliente pelo WhatsApp e acompanhar meus chamados"
-            className="relative inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[oklch(0.72_0.19_150)] text-white ring-2 ring-primary shadow-xl transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:h-14 md:w-14"
+            className={`relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[oklch(0.72_0.19_150)] text-white ring-2 ring-primary shadow-xl transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:h-14 md:w-14 ${touchArea}`}
           >
-            <WhatsAppIcon className="!h-6 !w-6 md:!h-7 md:!w-7" aria-hidden="true" />
+            <WhatsAppIcon className="!h-5 !w-5 md:!h-7 md:!w-7" aria-hidden="true" />
           </button>
         </div>
 
@@ -62,9 +66,9 @@ export function WhatsAppFloat() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Falar com a AguiarT.I pelo WhatsApp"
-            className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[oklch(0.72_0.19_150)] text-white shadow-lg transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:h-14 md:w-14"
+            className={`relative inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[oklch(0.72_0.19_150)] text-white shadow-lg transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 md:h-14 md:w-14 ${touchArea}`}
           >
-            <WhatsAppIcon className="!h-6 !w-6 md:!h-7 md:!w-7" aria-hidden="true" />
+            <WhatsAppIcon className="!h-5 !w-5 md:!h-7 md:!w-7" aria-hidden="true" />
           </a>
         </div>
       </div>
