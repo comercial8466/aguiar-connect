@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { BarChart3, CheckCircle2, Clock, Headset, ListChecks, Monitor, Network, ShieldCheck, Store } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import heroImage from "@/assets/hero-dashboard.jpg";
+import heroAsset from "@/assets/hero-analitico.jpg.asset.json";
+const heroImage = heroAsset.url;
 import { WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
 
