@@ -34,7 +34,7 @@ function Page() {
         title="Suporte Técnico Remoto"
         subtitle="Diagnóstico e resolução à distância para usuários finais e empresas, com SLA acordado em contrato."
       />
-      <div className="mx-auto max-w-4xl px-4 py-16">
+      <div className="mx-auto my-16 max-w-4xl rounded-3xl bg-surface-glass px-4 py-10">
         <h2 className="text-xl font-bold">Níveis de atendimento</h2>
         <p className="mt-2 text-sm text-muted-foreground">
           N1: triagem e problemas recorrentes. N2: análise técnica aprofundada. N3: especialistas em

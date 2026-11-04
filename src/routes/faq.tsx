@@ -50,7 +50,7 @@ function Faq() {
   return (
     <>
       <PageHero title="Perguntas frequentes" subtitle="Prazos, planos, segurança e uso do portal." />
-      <div className="mx-auto max-w-3xl px-4 py-16">
+      <div className="mx-auto my-16 max-w-3xl rounded-3xl bg-surface-glass px-4 py-10">
         <Accordion type="single" collapsible className="w-full">
           {perguntas.map((p, i) => (
             <AccordionItem key={p.q} value={`item-${i}`}>

@@ -33,7 +33,7 @@ function Sobre() {
         title="Sobre a AguiarT.I"
         subtitle="Tecnologia aplicada ao dia a dia do comércio e das empresas que não podem parar."
       />
-      <div className="mx-auto max-w-3xl px-4 py-16">
+      <div className="mx-auto my-16 max-w-3xl rounded-3xl bg-surface-glass px-4 py-10">
         <p className="text-muted-foreground">
           A AguiarT.I atua com automação comercial e suporte técnico remoto, atendendo desde usuários
           domésticos até redes com múltiplas lojas. Nossa proposta é simples: resolver rápido, com

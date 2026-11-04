@@ -38,7 +38,7 @@ function Page() {
         title="Automação Comercial"
         subtitle="PDV, impressoras fiscais, balanças e integração de sistemas de vendas com o seu ERP."
       />
-      <div className="mx-auto max-w-3xl px-4 py-16">
+      <div className="mx-auto my-16 max-w-3xl rounded-3xl bg-surface-glass px-4 py-10">
         <p className="text-muted-foreground">
           Cuidamos de toda a operação de frente de caixa e retaguarda: da homologação fiscal à
           integração com o ERP, garantindo que o seu ponto de venda não pare.

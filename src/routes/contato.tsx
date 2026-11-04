@@ -25,7 +25,7 @@ function Contato() {
   return (
     <>
       <PageHero title="Contato" subtitle="Resposta rápida por WhatsApp e atendimento remoto em todo o Brasil." />
-      <div className="mx-auto grid max-w-4xl gap-6 px-4 py-16 md:grid-cols-3">
+      <div className="mx-auto my-16 grid max-w-4xl gap-6 rounded-3xl bg-surface-glass px-4 py-10 md:grid-cols-3">
         <div className="rounded-xl border border-border p-6">
           <WhatsAppIcon className="h-5 w-5 text-primary" aria-hidden="true" />
           <h2 className="mt-3 font-semibold">WhatsApp</h2>
