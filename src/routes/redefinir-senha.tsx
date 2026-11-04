@@ -54,7 +54,7 @@ function ResetPage() {
   return (
     <>
       <PageHero title="Redefinir senha" subtitle="Crie uma nova senha para acessar o portal." />
-      <div className="mx-auto max-w-md px-4 py-16">
+      <div className="mx-auto my-16 max-w-md rounded-3xl bg-surface-glass px-4 py-10">
         <form onSubmit={submit} noValidate className="space-y-4 rounded-2xl border border-border p-6 shadow-card">
           <div className="space-y-2">
             <Label htmlFor="nova-senha">Nova senha</Label>
