@@ -38,7 +38,7 @@ function Page() {
         title="Consultoria e Treinamento"
         subtitle="Redes, servidores, backup, monitoramento e capacitação para a sua equipe."
       />
-      <div className="mx-auto max-w-3xl px-4 py-16">
+      <div className="mx-auto my-16 max-w-3xl rounded-3xl bg-surface-glass px-4 py-10">
         <ul className="space-y-3">
           {itens.map((i) => (
             <li key={i} className="flex gap-3 text-sm">

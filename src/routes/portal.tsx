@@ -38,7 +38,7 @@ function Portal() {
         title="Portal do Cliente"
         subtitle="Abertura de chamados, histórico, chat com técnico e dashboard de atendimento com SLA."
       />
-      <div className="mx-auto max-w-6xl px-4 py-16">
+      <div className="mx-auto my-16 max-w-6xl rounded-3xl bg-surface-glass px-4 py-10">
         <div className="grid gap-6 md:grid-cols-3">
           {recursos.map((r) => (
             <div key={r.t} className="rounded-xl border border-border p-6 shadow-card">

@@ -11,7 +11,7 @@ export function PageHero({ title, subtitle }: { title: string; subtitle?: string
 
 export function Prose({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mx-auto max-w-3xl space-y-5 px-4 py-16 text-sm leading-relaxed text-muted-foreground [&_h2]:mt-10 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-foreground [&_li]:ml-5 [&_li]:list-disc">
+    <div className="mx-auto my-16 max-w-3xl rounded-3xl bg-surface-glass px-4 py-10 text-sm leading-relaxed text-muted-foreground [&_h2]:mt-10 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-foreground [&_li]:ml-5 [&_li]:list-disc">
       {children}
     </div>
   );

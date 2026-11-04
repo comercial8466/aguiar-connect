@@ -68,7 +68,7 @@ function AbrirChamado() {
         title="Abrir chamado"
         subtitle="Preencha os dados abaixo. Seu chamado é encaminhado imediatamente à nossa mesa de suporte."
       />
-      <div className="mx-auto max-w-2xl px-4 py-16">
+      <div className="mx-auto my-16 max-w-2xl rounded-3xl bg-surface-glass px-4 py-10">
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid gap-5 sm:grid-cols-2">
             <div className="space-y-2">

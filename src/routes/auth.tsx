@@ -167,7 +167,7 @@ function AuthPage() {
         title="Portal do Cliente"
         subtitle="Crie sua conta em menos de 1 minuto e acompanhe seus chamados, status e SLA em tempo real."
       />
-      <div className="mx-auto max-w-md px-4 py-16">
+      <div className="mx-auto my-16 max-w-md rounded-3xl bg-surface-glass px-4 py-10">
         {via === "whatsapp" && (
           <div className="mb-6 rounded-xl border border-accent/50 bg-accent/10 p-4 text-sm">
             <p className="font-semibold text-primary">Você veio pelo WhatsApp 💬</p>

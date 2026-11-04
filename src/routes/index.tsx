@@ -124,7 +124,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20" aria-labelledby="servicos">
+      <section className="mx-auto my-10 max-w-6xl rounded-3xl bg-surface-glass px-4 py-16" aria-labelledby="servicos">
         <h2 id="servicos" className="text-3xl font-bold text-primary">
           Nossos serviços
         </h2>
@@ -151,7 +151,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-secondary/60 py-20" aria-labelledby="portal">
+      <section className="bg-surface-glass py-16" aria-labelledby="portal">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 lg:grid-cols-2">
           <div>
             <h2 id="portal" className="text-3xl font-bold text-primary">
@@ -196,7 +196,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-4 py-20" aria-labelledby="diferenciais">
+      <section className="mx-auto my-10 max-w-6xl rounded-3xl bg-surface-glass px-4 py-16" aria-labelledby="diferenciais">
         <h2 id="diferenciais" className="text-3xl font-bold text-primary">
           Por que a AguiarT.I
         </h2>
@@ -211,7 +211,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-secondary/60 py-20" aria-labelledby="depoimentos">
+      <section className="bg-surface-glass py-16" aria-labelledby="depoimentos">
         <div className="mx-auto max-w-6xl px-4">
           <h2 id="depoimentos" className="text-3xl font-bold text-primary">
             Quem confia na gente

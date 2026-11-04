@@ -50,7 +50,7 @@ function ServicosIndex() {
         title="Nossos serviços"
         subtitle="Soluções de tecnologia para o balcão, o escritório e o data center."
       />
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-16 md:grid-cols-3">
+      <div className="mx-auto my-16 grid max-w-6xl gap-6 rounded-3xl bg-surface-glass px-4 py-10 md:grid-cols-3">
         {items.map((s) => (
           <article key={s.title} className="rounded-xl border border-border p-6 shadow-card">
             <s.icon className="h-6 w-6 text-primary" aria-hidden="true" />
