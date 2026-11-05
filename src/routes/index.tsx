@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { BarChart3, CheckCircle2, Clock, Headset, ListChecks, Monitor, Network, ShieldCheck, Store } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import heroAsset from "@/assets/hero-analitico.jpg.asset.json";
+import heroAsset from "@/assets/hero-dashboard-central.png.asset.json";
 const heroImage = heroAsset.url;
 import { WHATSAPP_DISPLAY, whatsappLink } from "@/lib/site";
 import { WhatsAppIcon } from "@/components/site/WhatsAppIcon";
@@ -74,7 +74,7 @@ function Home() {
   return (
     <>
       <section className="bg-hero-gradient text-primary-foreground">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:py-24 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 px-3 py-1 text-xs font-medium">
               <span className="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
@@ -105,9 +105,9 @@ function Home() {
           <img
             src={heroImage}
             alt="Dashboard de chamados da AguiarT.I com gráficos de SLA e terminal de PDV"
-            width={1280}
-            height={960}
-            className="w-full rounded-2xl shadow-card"
+            width={1920}
+            height={1088}
+            className="aspect-[16/9] w-full rounded-2xl object-cover shadow-glow"
           />
         </div>
 
