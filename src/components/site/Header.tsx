@@ -33,7 +33,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/90 backdrop-blur">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-6 sm:px-4">
         <Link to="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
           <img src={logo} alt="Logo AguiarT.I" width={40} height={40} className="h-9 w-9 rounded object-cover" />
           <span className="font-display text-lg font-bold text-primary">
@@ -102,7 +102,7 @@ export function Header() {
 
       {open && (
         <div className="border-t border-border bg-background lg:hidden">
-          <nav aria-label="Principal mobile" className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-4">
+          <nav aria-label="Principal mobile" className="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-4 sm:px-4">
             {nav.map((item) => (
               <Link
                 key={item.to}
