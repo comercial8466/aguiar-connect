@@ -30,7 +30,7 @@ export function WhatsAppFloat() {
       <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-4 pb-[env(safe-area-inset-bottom)]">
         {/* Botão do Agente Virtual Inteligente */}
         <div className="flex items-center gap-2.5">
-          <span className={`${labelBase} bg-primary text-primary-foreground`}>Assistente IA</span>
+          <span className={`${labelBase} inline-flex sm:hidden lg:inline-flex bg-primary text-primary-foreground`}>Assistente IA</span>
           <button
             type="button"
             onClick={() => setIsAgentOpen(true)}
@@ -47,7 +47,7 @@ export function WhatsAppFloat() {
 
         {/* Entrar no portal pelo WhatsApp */}
         <div className="flex items-center gap-2.5">
-          <span className={`${labelBase} bg-[oklch(0.72_0.19_150)] text-white`}>Entrar no portal</span>
+          <span className={`${labelBase} inline-flex sm:hidden lg:inline-flex bg-[oklch(0.72_0.19_150)] text-white`}>Entrar no portal</span>
           <button
             type="button"
             onClick={entrarPeloWhats}
@@ -60,7 +60,7 @@ export function WhatsAppFloat() {
 
         {/* Botão WhatsApp Direto */}
         <div className="flex items-center gap-2.5">
-          <span className={`${labelBase} bg-zinc-900 text-white`}>Fale no WhatsApp</span>
+          <span className={`${labelBase} inline-flex sm:hidden lg:inline-flex bg-zinc-900 text-white`}>Fale no WhatsApp</span>
           <a
             href={whatsappLink("Olá! Vim pelo site da AguiarT.I e preciso de suporte técnico.")}
             target="_blank"

@@ -75,19 +75,19 @@ function Home() {
     <>
       <section className="bg-hero-gradient text-primary-foreground">
         <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-16 sm:px-6 lg:px-10 md:py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)]">
-          <div>
+          <div className="text-center lg:text-left">
             <span className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/25 px-3 py-1 text-xs font-medium">
               <span className="h-2 w-2 rounded-full bg-accent" aria-hidden="true" />
               Atendimento 24/7 · SLA garantido
             </span>
-            <h1 className="mt-5 text-4xl font-extrabold leading-tight md:text-5xl">
+            <h1 className="mx-auto mt-5 max-w-3xl text-4xl font-extrabold leading-tight md:text-5xl lg:mx-0">
               AguiarT.I: Tecnologia que Impulsiona o seu negócio
             </h1>
-            <p className="mt-5 max-w-xl text-lg text-primary-foreground/80">
+            <p className="mx-auto mt-5 max-w-xl text-lg text-primary-foreground/80 lg:mx-0">
               Especialistas em Automação Comercial e Suporte Técnico Remoto, com abertura de chamados
               e gestão de atendimento por dashboard.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:items-start lg:justify-start">
               <Button variant="hero" size="xl" asChild>
                 <Link to="/abrir-chamado">Abrir Chamado Agora</Link>
               </Button>
