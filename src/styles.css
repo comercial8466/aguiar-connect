@@ -34,6 +34,10 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-hero-background: var(--hero-background);
+  --color-hero-foreground: var(--hero-foreground);
+  --color-hero-muted: var(--hero-muted);
+  --color-home-surface: var(--home-surface);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
@@ -78,6 +82,10 @@
   --primary: oklch(0.37 0.104 254.5);
   --primary-foreground: oklch(1 0 0);
   --primary-dark: oklch(0.27 0.084 254.5);
+  --hero-background: oklch(0.27 0.084 254.5);
+  --hero-foreground: oklch(1 0 0);
+  --hero-muted: oklch(0.92 0.01 250);
+  --home-surface: oklch(1 0 0 / 0.98);
 
   /* Cinza Grafite #2F2F2F */
   --secondary: oklch(0.96 0.005 250);
@@ -120,6 +128,7 @@
 
 
 .dark {
+  --home-surface: oklch(0.16 0.025 260 / 0.98);
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
   --card: oklch(0.208 0.042 265.755);
@@ -206,7 +215,17 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
+  }
+}
+
+@utility home-section {
+  scroll-margin-top: 10rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }
 
