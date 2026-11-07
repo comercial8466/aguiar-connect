@@ -81,3 +81,7 @@ Ao expandir o agente ou adicionar novos tópicos de suporte, atualize `AGENT_TOP
 4. **Sincronização com Lovable:** Mantenha os delimitadores `<!-- LOVABLE:BEGIN -->` intactos no topo deste arquivo.
 
 5. **Testes:** `bun run test` (Vitest). Regras de exportação do Power BI ficam em `src/lib/powerbi-export.ts` para serem testáveis; testes de banco em `tests/db/` rodam em transação com ROLLBACK e são pulados quando a conexão não pode alterar chamados.
+
+## Presentation architecture
+- Public contact forms compose a WhatsApp message without persisting submissions or claiming delivery; this keeps contact transparent and avoids collecting unnecessary personal data.
+- Home section navigation uses same-page anchors and a client-side IntersectionObserver; this preserves normal links without adding a scroll dependency.

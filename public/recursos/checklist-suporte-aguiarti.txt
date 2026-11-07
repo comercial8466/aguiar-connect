@@ -1,0 +1,23 @@
+AGUIART.I — CHECKLIST PARA SOLICITAR SUPORTE
+
+1. Identifique o equipamento ou sistema
+Informe se o problema está no PDV, ERP, impressora, rede ou outro equipamento.
+
+2. Descreva o que aconteceu
+Anote a mensagem de erro, quando começou e o que estava sendo feito.
+
+3. Informe o impacto na operação
+As vendas pararam? A emissão fiscal está indisponível? Quantos terminais foram afetados?
+
+4. Separe as informações úteis
+Inclua o nome da empresa, o modelo do equipamento e a identificação do terminal.
+Se possível, envie uma captura da mensagem de erro sem dados pessoais.
+
+5. Preserve a segurança
+Não envie senhas, dados de cartões ou documentos pessoais no chamado.
+Não instale programas de acesso remoto de fontes desconhecidas.
+
+6. Abra um chamado no portal ou fale com o suporte
+WhatsApp oficial: +55 51 99666-8646
+
+Este checklist reúne informações para o diagnóstico. Não substitui uma avaliação técnica.
